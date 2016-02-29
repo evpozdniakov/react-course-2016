@@ -8,14 +8,14 @@ const NewsList = React.createClass({
     }))
   },
 
-  getInitialState: function() {
+  getInitialState() {
     return {
       expandedItemId: -1,
       commentsShown: false,
     }
   },
 
-  toggleNewsContent: function(ev, data) {
+  toggleNewsContent(ev, data) {
     if (this.state.expandedItemId === data.id) {
       this.setState({expandedItemId: -1})
     }
@@ -26,12 +26,12 @@ const NewsList = React.createClass({
     this.setState({commentsShown: false})
   },
 
-  toggleNewsComments: function() {
+  toggleNewsComments() {
     this.setState({commentsShown: !this.state.commentsShown})
   },
 
-  render: function() {
-    const items = this.props.newsData.map(function(newsItem) {
+  render() {
+    const items = this.props.newsData.map(newsItem => {
       newsItem.isExpanded = newsItem.id === this.state.expandedItemId
       newsItem.commentsShown = newsItem.isExpanded && this.state.commentsShown 
 
@@ -43,7 +43,7 @@ const NewsList = React.createClass({
       }
 
       return <NewsItem {...props} />
-    }.bind(this))
+    })
 
     const props = {
       className: 'news-list-ctnr'

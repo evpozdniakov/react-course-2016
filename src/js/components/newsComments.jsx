@@ -9,11 +9,7 @@ const NewsComments = React.createClass({
     })).isRequired
   },
 
-  toggleComments: function() {
-    this.props.toggleNewsComments();
-  },
-
-  render: function() {
+  render() {
     if (this.props.comments.length === 0) {
       return null      
     }
@@ -30,10 +26,10 @@ const NewsComments = React.createClass({
     )
   },
 
-  renderToggle: function() {
+  renderToggle() {
     const props = {
       className: 'comments-toggle',
-      onClick: this.toggleComments
+      onClick: this.props.toggleNewsComments
     }
 
     return (
@@ -43,8 +39,8 @@ const NewsComments = React.createClass({
     )
   },
 
-  renderList: function() {
-    const commentElms = this.props.comments.map(function(comment) {
+  renderList() {
+    const commentElms = this.props.comments.map(comment => {
       const props = {
         key: comment.id,
         comment: comment

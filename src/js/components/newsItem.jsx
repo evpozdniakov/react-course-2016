@@ -16,15 +16,13 @@ const NewsItem = React.createClass({
     toggleNewsComments: React.PropTypes.func.isRequired,
   },
 
-  handleTitleClick: function(ev) {
-    this.props.toggleNewsContent(ev, {id: this.props.newsItem.id})
+  getTitleClickHandler(id) {
+    return (ev) => {
+      this.props.toggleNewsContent(ev, {id: id})
+    }
   },
 
-  handleCommentsClick: function() {
-    this.props.toggleNewsComments()
-  },
-
-  render: function() {
+  render() {
     var className = 'news-item';
 
     if (!this.props.newsItem.isExpanded) {
@@ -44,7 +42,7 @@ const NewsItem = React.createClass({
     )
   },
 
-  renderDate: function() {
+  renderDate() {
     return (
       <div className="news-date">
         {this.props.newsItem.published}
@@ -52,17 +50,22 @@ const NewsItem = React.createClass({
     )
   },
 
-  renderTitle: function() {
-    const title = React.createElement('span', {}, this.props.newsItem.title);
+  renderTitle() {
+    const {id, title} = this.props.newsItem;
+
     const props = {
       className: 'news-title',
-      onClick: this.handleTitleClick
+      onClick: this.getTitleClickHandler(id)
     }
 
-    return <div {...props}>{title}</div>
+    return (
+      <div {...props}>
+        <span>{title}</span>
+      </div>
+    )
   },
 
-  renderContent: function() {
+  renderContent() {
     return (
       <div className="news-content">
         {this.props.newsItem.content}
@@ -70,10 +73,10 @@ const NewsItem = React.createClass({
     )
   },
 
-  renderComments: function() {
+  renderComments() {
     const props = {
       comments: this.props.newsItem.comments,
-      toggleNewsComments: this.handleCommentsClick
+      toggleNewsComments: this.props.toggleNewsComments
     }
 
     return <NewsComments {...props} />

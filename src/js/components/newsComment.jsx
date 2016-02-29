@@ -8,7 +8,7 @@ const NewsComment = React.createClass({
     })
   },
 
-  render: function() {
+  render() {
     return (
       <div className="news-comment">
         {this.renderAuthor()}
@@ -17,7 +17,7 @@ const NewsComment = React.createClass({
     )
   },
 
-  renderAuthor: function() {
+  renderAuthor() {
     return (
       <div className="comment-author">
         {this.props.comment.author}
@@ -25,7 +25,7 @@ const NewsComment = React.createClass({
     )
   },
 
-  renderText: function() {
+  renderText() {
     return (
       <div className="comment-text">
         {this.props.comment.text}
