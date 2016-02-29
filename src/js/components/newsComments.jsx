@@ -22,9 +22,11 @@ const NewsComments = React.createClass({
       className: 'news-comments',
     }
 
-    return React.createElement('div', props,
-      this.renderToggle(),
-      this.renderList()
+    return (
+      <div {...props}>
+        {this.renderToggle()}
+        {this.renderList()}
+      </div>
     )
   },
 
@@ -34,7 +36,11 @@ const NewsComments = React.createClass({
       onClick: this.toggleComments
     }
 
-    return React.createElement('div', props, 'Комментариев: ' + this.props.comments.length)
+    return (
+      <div {...props}>
+        Комментариев: {this.props.comments.length}
+      </div>
+    )
   },
 
   renderList: function() {
@@ -44,14 +50,14 @@ const NewsComments = React.createClass({
         comment: comment
       }
 
-      return React.createElement(NewsComment, props)
+      return <NewsComment {...props} />
     })
 
     const props = {
       className: 'comment-list'
     }
 
-    return React.createElement('div', props, commentElms)
+    return <div {...props}>{commentElms}</div>
   }
 })
 

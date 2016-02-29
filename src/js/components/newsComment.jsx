@@ -9,18 +9,28 @@ const NewsComment = React.createClass({
   },
 
   render: function() {
-    return React.createElement('div', {className: 'news-comment'},
-      this.renderAuthor(),
-      this.renderText()
+    return (
+      <div className="news-comment">
+        {this.renderAuthor()}
+        {this.renderText()}
+      </div>
     )
   },
 
   renderAuthor: function() {
-    return React.createElement('div', {className: 'comment-author'}, this.props.comment.author)
+    return (
+      <div className="comment-author">
+        {this.props.comment.author}
+      </div>
+    )
   },
 
   renderText: function() {
-    return React.createElement('div', {className: 'comment-text'}, this.props.comment.text)
+    return (
+      <div className="comment-text">
+        {this.props.comment.text}
+      </div>
+    )
   }
 })
 

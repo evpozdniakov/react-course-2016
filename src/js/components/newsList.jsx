@@ -42,14 +42,14 @@ const NewsList = React.createClass({
         newsItem: newsItem,
       }
 
-      return React.createElement(NewsItem, props)
+      return <NewsItem {...props} />
     }.bind(this))
 
     const props = {
       className: 'news-list-ctnr'
     }
 
-    return React.createElement('div', props, items)
+    return <div {...props}>{items}</div>
   }
 })
 

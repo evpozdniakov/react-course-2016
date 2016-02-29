@@ -25,7 +25,7 @@ const NewsItem = React.createClass({
   },
 
   render: function() {
-    const className = 'news-item';
+    var className = 'news-item';
 
     if (!this.props.newsItem.isExpanded) {
       className += ' collapsed'
@@ -34,16 +34,22 @@ const NewsItem = React.createClass({
       className += ' with-comments'
     }
 
-    return React.createElement('div', {className: className},
-      this.renderDate(),
-      this.renderTitle(),
-      this.renderContent(),
-      this.renderComments()
+    return (
+      <div className={className}>
+        {this.renderDate()}
+        {this.renderTitle()}
+        {this.renderContent()}
+        {this.renderComments()}
+      </div>
     )
   },
 
   renderDate: function() {
-    return React.createElement('div', {className: 'news-date'}, this.props.newsItem.published)
+    return (
+      <div className="news-date">
+        {this.props.newsItem.published}
+      </div>
+    )
   },
 
   renderTitle: function() {
@@ -53,11 +59,15 @@ const NewsItem = React.createClass({
       onClick: this.handleTitleClick
     }
 
-    return React.createElement('div', props, title)
+    return <div {...props}>{title}</div>
   },
 
   renderContent: function() {
-    return React.createElement('div', {className: 'news-content'}, this.props.newsItem.content)
+    return (
+      <div className="news-content">
+        {this.props.newsItem.content}
+      </div>
+    )
   },
 
   renderComments: function() {
@@ -65,7 +75,8 @@ const NewsItem = React.createClass({
       comments: this.props.newsItem.comments,
       toggleNewsComments: this.handleCommentsClick
     }
-    return React.createElement(NewsComments, props)
+
+    return <NewsComments {...props} />
   }
 })
 
