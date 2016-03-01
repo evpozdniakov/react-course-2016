@@ -1,23 +1,23 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import NewsComments from 'components/newsComments'
-import hasMouse from 'HOC/hasMouse'
+import timeSpent from 'HOC/timeSpent'
 
 const NewsItem = React.createClass({
   propTypes: {
-    newsItem: React.PropTypes.shape({
-      id: React.PropTypes.number.isRequired,
-      title: React.PropTypes.string.isRequired,
-      published: React.PropTypes.string.isRequired,
-      content: React.PropTypes.string.isRequired,
-      comments: React.PropTypes.array.isRequired,
-      isExpanded: React.PropTypes.bool.isRequired,
-      commentsShown: React.PropTypes.bool.isRequired
+    newsItem: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      published: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+      comments: PropTypes.array.isRequired,
+      isExpanded: PropTypes.bool.isRequired,
+      commentsShown: PropTypes.bool.isRequired
     }).isRequired,
-    toggleNewsContent: React.PropTypes.func.isRequired,
-    toggleNewsComments: React.PropTypes.func.isRequired,
-    mouseEnter: React.PropTypes.func.isRequired,
-    mouseLeave: React.PropTypes.func.isRequired,
-    calcClassName: React.PropTypes.func.isRequired,
+    toggleNewsContent: PropTypes.func.isRequired,
+    toggleNewsComments: PropTypes.func.isRequired,
+    onMouseEnter: PropTypes.func.isRequired,
+    onMouseLeave: PropTypes.func.isRequired,
+    mlsSpent: PropTypes.string,
   },
 
   render() {
@@ -31,9 +31,9 @@ const NewsItem = React.createClass({
     }
 
     const props = {
-      className: this.props.calcClassName(className),
-      onMouseEnter: this.props.mouseEnter,
-      onMouseLeave: this.props.mouseLeave,
+      className,
+      onMouseEnter: this.props.onMouseEnter,
+      onMouseLeave: this.props.onMouseLeave,
     }
 
     return (
@@ -42,6 +42,7 @@ const NewsItem = React.createClass({
         {this.renderTitle()}
         {this.renderContent()}
         {this.renderComments()}
+        {this.renderTimeSpent()}
       </div>
     )
   },
@@ -84,7 +85,11 @@ const NewsItem = React.createClass({
     }
 
     return <NewsComments {...props} />
+  },
+
+  renderTimeSpent() {
+    return <span className="time-spent">{this.props.mlsSpent}</span>
   }
 })
 
-export default hasMouse(NewsItem)
+export default timeSpent(NewsItem)
