@@ -9,7 +9,7 @@ const NewsComment = React.createClass({
     }),
     onMouseEnter: PropTypes.func.isRequired,
     onMouseLeave: PropTypes.func.isRequired,
-    mlsSpent: PropTypes.number,
+    renderTimeSpent: PropTypes.func.isRequired,
   },
 
   render() {
@@ -23,7 +23,7 @@ const NewsComment = React.createClass({
       <div {...props}>
         {this.renderAuthor()}
         {this.renderText()}
-        {this.renderTimeSpent()}
+        {this.props.renderTimeSpent()}
       </div>
     )
   },
@@ -42,10 +42,6 @@ const NewsComment = React.createClass({
         {this.props.comment.text}
       </div>
     )
-  },
-
-  renderTimeSpent() {
-    return <span className="time-spent">{this.props.mlsSpent}</span>
   }
 })
 

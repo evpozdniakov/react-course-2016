@@ -21,17 +21,32 @@ export default OriginalComponent => {
 			clearInterval(this._timer)
 		}
 
+		timeSpentToString() {
+			const mlsSpent = this.state.mlsSpent
+
+			if (mlsSpent < 1000) {
+				return mlsSpent
+			}
+
+			return Math.round(mlsSpent / 1000) + 's'
+		}
+
 		render() {
 			const props = {
 				mlsSpent: this.state.mlsSpent,
 				onMouseEnter: this.startCountTime.bind(this),
 				onMouseLeave: this.stopCountTime.bind(this),
+				renderTimeSpent: this.renderTimeSpent.bind(this),
 				...this.props
 			}
 
 			return (
 				<OriginalComponent {...props} />
 			)
+		}
+
+		renderTimeSpent() {
+		  return <span className="time-spent">{this.timeSpentToString()}</span>
 		}
 	}
 }

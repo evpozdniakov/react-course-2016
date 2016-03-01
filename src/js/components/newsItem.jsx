@@ -17,7 +17,7 @@ const NewsItem = React.createClass({
     toggleNewsComments: PropTypes.func.isRequired,
     onMouseEnter: PropTypes.func.isRequired,
     onMouseLeave: PropTypes.func.isRequired,
-    mlsSpent: PropTypes.string,
+    renderTimeSpent: PropTypes.func.isRequired,
   },
 
   render() {
@@ -42,7 +42,7 @@ const NewsItem = React.createClass({
         {this.renderTitle()}
         {this.renderContent()}
         {this.renderComments()}
-        {this.renderTimeSpent()}
+        {this.props.renderTimeSpent()}
       </div>
     )
   },
@@ -85,10 +85,6 @@ const NewsItem = React.createClass({
     }
 
     return <NewsComments {...props} />
-  },
-
-  renderTimeSpent() {
-    return <span className="time-spent">{this.props.mlsSpent}</span>
   }
 })
 
