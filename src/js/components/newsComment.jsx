@@ -1,27 +1,29 @@
-import React from 'react'
-import hasMouse from 'HOC/hasMouse'
+import React, {PropTypes} from 'react'
+import timeSpent from 'HOC/timeSpent'
 
 const NewsComment = React.createClass({
   propTypes: {
-    comment: React.PropTypes.shape({
-      author: React.PropTypes.string.isRequired,
-      text: React.PropTypes.string.isRequired,
+    comment: PropTypes.shape({
+      author: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired,
     }),
-    mouseEnter: React.PropTypes.func.isRequired,
-    mouseLeave: React.PropTypes.func.isRequired,
-    calcClassName: React.PropTypes.func.isRequired,
+    onMouseEnter: PropTypes.func.isRequired,
+    onMouseLeave: PropTypes.func.isRequired,
+    mlsSpent: PropTypes.number,
   },
 
   render() {
     const props = {
-      className: this.props.calcClassName('news-comment'),
-      onMouseEnter: this.props.mouseEnter,
-      onMouseLeave: this.props.mouseLeave,
+      className: 'news-comment',
+      onMouseEnter: this.props.onMouseEnter,
+      onMouseLeave: this.props.onMouseLeave,
     }
+
     return (
       <div {...props}>
         {this.renderAuthor()}
         {this.renderText()}
+        {this.renderTimeSpent()}
       </div>
     )
   },
@@ -40,7 +42,11 @@ const NewsComment = React.createClass({
         {this.props.comment.text}
       </div>
     )
+  },
+
+  renderTimeSpent() {
+    return <span className="time-spent">{this.props.mlsSpent}</span>
   }
 })
 
-export default hasMouse(NewsComment)
+export default timeSpent(NewsComment)

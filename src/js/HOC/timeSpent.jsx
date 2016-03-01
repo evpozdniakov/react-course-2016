@@ -1,9 +1,11 @@
-import {Component} from 'react'
+import React, {Component} from 'react'
 
-return function(OriginalComponent) {
+export default OriginalComponent => {
 	return class extends Component {
 		constructor() {
-			this.state: {mlsSpent: 0}
+			super()
+
+			this.state = {mlsSpent: 0}
 		}
 
 		startCountTime() {
@@ -20,12 +22,13 @@ return function(OriginalComponent) {
 		}
 
 		render() {
-			const props {
+			const props = {
 				mlsSpent: this.state.mlsSpent,
-				onMouseEnter: this.startCountTime,
-				onMouseLeave: this.stopCountTime,
+				onMouseEnter: this.startCountTime.bind(this),
+				onMouseLeave: this.stopCountTime.bind(this),
 				...this.props
 			}
+
 			return (
 				<OriginalComponent {...props} />
 			)
