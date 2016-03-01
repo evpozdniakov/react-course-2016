@@ -15,8 +15,8 @@ const NewsItem = React.createClass({
     }).isRequired,
     toggleNewsContent: PropTypes.func.isRequired,
     toggleNewsComments: PropTypes.func.isRequired,
-    onMouseEnter: PropTypes.func.isRequired,
-    onMouseLeave: PropTypes.func.isRequired,
+    startCountTime: PropTypes.func.isRequired,
+    stopCountTime: PropTypes.func.isRequired,
     renderTimeSpent: PropTypes.func.isRequired,
   },
 
@@ -32,8 +32,8 @@ const NewsItem = React.createClass({
 
     const props = {
       className,
-      onMouseEnter: this.props.onMouseEnter,
-      onMouseLeave: this.props.onMouseLeave,
+      onMouseEnter: this.props.startCountTime,
+      onMouseLeave: this.props.stopCountTime,
     }
 
     return (

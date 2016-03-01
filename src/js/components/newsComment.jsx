@@ -7,16 +7,16 @@ const NewsComment = React.createClass({
       author: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired,
     }),
-    onMouseEnter: PropTypes.func.isRequired,
-    onMouseLeave: PropTypes.func.isRequired,
+    startCountTime: PropTypes.func.isRequired,
+    stopCountTime: PropTypes.func.isRequired,
     renderTimeSpent: PropTypes.func.isRequired,
   },
 
   render() {
     const props = {
       className: 'news-comment',
-      onMouseEnter: this.props.onMouseEnter,
-      onMouseLeave: this.props.onMouseLeave,
+      onMouseEnter: this.props.startCountTime,
+      onMouseLeave: this.props.stopCountTime,
     }
 
     return (

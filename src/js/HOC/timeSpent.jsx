@@ -34,8 +34,8 @@ export default OriginalComponent => {
 		render() {
 			const props = {
 				mlsSpent: this.state.mlsSpent,
-				onMouseEnter: this.startCountTime.bind(this),
-				onMouseLeave: this.stopCountTime.bind(this),
+				startCountTime: this.startCountTime.bind(this),
+				stopCountTime: this.stopCountTime.bind(this),
 				renderTimeSpent: this.renderTimeSpent.bind(this),
 				...this.props
 			}
