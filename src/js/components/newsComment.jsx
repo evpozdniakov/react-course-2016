@@ -2,9 +2,11 @@
 
 import React, {PropTypes} from 'react'
 import timeSpent from 'HOC/timeSpent'
-import hintInfo from 'HOC/hintInfo'
+import hintInfo from 'mixins/hintInfo'
 
 const NewsComment = React.createClass({
+  mixins: [hintInfo],
+
   propTypes: {
     comment: PropTypes.shape({
       author: PropTypes.string.isRequired,
@@ -13,8 +15,6 @@ const NewsComment = React.createClass({
     startCountTime: PropTypes.func.isRequired,
     stopCountTime: PropTypes.func.isRequired,
     renderTimeSpent: PropTypes.func.isRequired,
-    showHintInfo: PropTypes.func.isRequired,
-    hideHintInfo: PropTypes.func.isRequired,
   },
 
   getHintInfo() {
@@ -23,12 +23,12 @@ const NewsComment = React.createClass({
 
   handleMouseEnter() {
     this.props.startCountTime()
-    this.props.showHintInfo(this.getHintInfo())
+    this.showHintInfo(this.getHintInfo())
   },
 
   handleMouseLeave() {
     this.props.stopCountTime()
-    this.props.hideHintInfo()
+    this.hideHintInfo()
   },
 
   render() {
@@ -64,4 +64,4 @@ const NewsComment = React.createClass({
   }
 })
 
-export default timeSpent(hintInfo(NewsComment))
+export default timeSpent(NewsComment)

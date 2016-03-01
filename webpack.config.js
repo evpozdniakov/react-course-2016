@@ -20,6 +20,7 @@ module.exports = {
 		alias: {
 			components: path.resolve(__dirname, 'src/js/components'),
 			HOC: path.resolve(__dirname, 'src/js/HOC'),
+			mixins: path.resolve(__dirname, 'src/js/mixins'),
 		}
 	},
 

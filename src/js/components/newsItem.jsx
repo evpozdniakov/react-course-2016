@@ -3,9 +3,11 @@
 import React, {PropTypes} from 'react'
 import NewsComments from 'components/newsComments'
 import timeSpent from 'HOC/timeSpent'
-import hintInfo from 'HOC/hintInfo'
+import hintInfo from 'mixins/hintInfo'
 
 const NewsItem = React.createClass({
+  mixins: [hintInfo],
+
   propTypes: {
     newsItem: PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -29,12 +31,12 @@ const NewsItem = React.createClass({
 
   handleMouseEnter() {
     this.props.startCountTime()
-    this.props.showHintInfo(this.getHintInfo())
+    this.showHintInfo(this.getHintInfo())
   },
 
   handleMouseLeave() {
     this.props.stopCountTime()
-    this.props.hideHintInfo()
+    this.hideHintInfo()
   },
 
   render() {
@@ -105,4 +107,4 @@ const NewsItem = React.createClass({
   }
 })
 
-export default timeSpent(hintInfo(NewsItem))
+export default timeSpent(NewsItem)
