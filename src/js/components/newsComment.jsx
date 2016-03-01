@@ -1,3 +1,5 @@
+'use strict'
+
 import React, {PropTypes} from 'react'
 import timeSpent from 'HOC/timeSpent'
 import hintInfo from 'HOC/hintInfo'

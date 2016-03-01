@@ -1,3 +1,5 @@
+'use strict'
+
 require('!style!css!components/news.css')
 
 import React from 'react'

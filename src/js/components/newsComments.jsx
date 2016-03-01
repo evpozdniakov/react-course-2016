@@ -1,3 +1,5 @@
+'use strict'
+
 import React from 'react'
 import NewsComment from 'components/newsComment'
 

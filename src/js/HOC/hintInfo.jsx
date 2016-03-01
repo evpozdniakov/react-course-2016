@@ -1,3 +1,5 @@
+'use strict'
+
 require('!style!css!HOC/hintInfo.css')
 
 import React, {Component} from 'react'

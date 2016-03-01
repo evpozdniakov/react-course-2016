@@ -1,3 +1,5 @@
+'use strict'
+
 import React from 'react'
 import NewsItem from 'components/newsItem'
 

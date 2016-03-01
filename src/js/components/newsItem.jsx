@@ -1,3 +1,5 @@
+'use strict'
+
 import React, {PropTypes} from 'react'
 import NewsComments from 'components/newsComments'
 import timeSpent from 'HOC/timeSpent'
