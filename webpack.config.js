@@ -19,6 +19,7 @@ module.exports = {
 		extensions: ['', '.js', '.jsx'],
 		alias: {
 			components: path.resolve(__dirname, 'src/js/components'),
+			HOC: path.resolve(__dirname, 'src/js/HOC'),
 		}
 	},
 

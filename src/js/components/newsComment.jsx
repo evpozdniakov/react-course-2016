@@ -1,16 +1,25 @@
 import React from 'react'
+import hasMouse from 'HOC/hasMouse'
 
 const NewsComment = React.createClass({
   propTypes: {
     comment: React.PropTypes.shape({
       author: React.PropTypes.string.isRequired,
-      text: React.PropTypes.string.isRequired      
-    })
+      text: React.PropTypes.string.isRequired,
+    }),
+    mouseEnter: React.PropTypes.func.isRequired,
+    mouseLeave: React.PropTypes.func.isRequired,
+    calcClassName: React.PropTypes.func.isRequired,
   },
 
   render() {
+    const props = {
+      className: this.props.calcClassName('news-comment'),
+      onMouseEnter: this.props.mouseEnter,
+      onMouseLeave: this.props.mouseLeave,
+    }
     return (
-      <div className="news-comment">
+      <div {...props}>
         {this.renderAuthor()}
         {this.renderText()}
       </div>
@@ -34,4 +43,4 @@ const NewsComment = React.createClass({
   }
 })
 
-export default NewsComment
+export default hasMouse(NewsComment)

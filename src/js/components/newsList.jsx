@@ -15,15 +15,17 @@ const NewsList = React.createClass({
     }
   },
 
-  toggleNewsContent(ev, data) {
-    if (this.state.expandedItemId === data.id) {
-      this.setState({expandedItemId: -1})
-    }
-    else {
-      this.setState({expandedItemId: data.id})
-    }
+  getToggleNewsContentHandler(id) {
+    return () => {
+      if (this.state.expandedItemId === id) {
+        this.setState({expandedItemId: -1})
+      }
+      else {
+        this.setState({expandedItemId: id})
+      }
 
-    this.setState({commentsShown: false})
+      this.setState({commentsShown: false})
+    }
   },
 
   toggleNewsComments() {
@@ -37,7 +39,7 @@ const NewsList = React.createClass({
 
       const props = {
         key: newsItem.id,
-        toggleNewsContent: this.toggleNewsContent,
+        toggleNewsContent: this.getToggleNewsContentHandler(newsItem.id),
         toggleNewsComments: this.toggleNewsComments,
         newsItem: newsItem,
       }

@@ -1,5 +1,6 @@
 import React from 'react'
 import NewsComments from 'components/newsComments'
+import hasMouse from 'HOC/hasMouse'
 
 const NewsItem = React.createClass({
   propTypes: {
@@ -14,12 +15,9 @@ const NewsItem = React.createClass({
     }).isRequired,
     toggleNewsContent: React.PropTypes.func.isRequired,
     toggleNewsComments: React.PropTypes.func.isRequired,
-  },
-
-  getTitleClickHandler(id) {
-    return (ev) => {
-      this.props.toggleNewsContent(ev, {id: id})
-    }
+    mouseEnter: React.PropTypes.func.isRequired,
+    mouseLeave: React.PropTypes.func.isRequired,
+    calcClassName: React.PropTypes.func.isRequired,
   },
 
   render() {
@@ -32,8 +30,14 @@ const NewsItem = React.createClass({
       className += ' with-comments'
     }
 
+    const props = {
+      className: this.props.calcClassName(className),
+      onMouseEnter: this.props.mouseEnter,
+      onMouseLeave: this.props.mouseLeave,
+    }
+
     return (
-      <div className={className}>
+      <div {...props}>
         {this.renderDate()}
         {this.renderTitle()}
         {this.renderContent()}
@@ -55,7 +59,7 @@ const NewsItem = React.createClass({
 
     const props = {
       className: 'news-title',
-      onClick: this.getTitleClickHandler(id)
+      onClick: this.props.toggleNewsContent
     }
 
     return (
@@ -83,4 +87,4 @@ const NewsItem = React.createClass({
   }
 })
 
-export default NewsItem
+export default hasMouse(NewsItem)
