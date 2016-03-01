@@ -35,8 +35,8 @@ const hasMouseHOC = function(OriginalComponent) {
 			const props = {
 				...this.state,
 				calcClassName: this.calcClassName,
-				mouseEnter: this.handleMouseEnter,
-				mouseLeave: this.handleMouseLeave,
+				mouseEnter: this.handleMouseEnter.bind(this),
+				mouseLeave: this.handleMouseLeave.bind(this),
 				...this.props,
 			}
 

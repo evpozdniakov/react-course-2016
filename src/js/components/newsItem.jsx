@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react'
 import NewsComments from 'components/newsComments'
 import timeSpent from 'HOC/timeSpent'
+import hintInfo from 'HOC/hintInfo'
 
 const NewsItem = React.createClass({
   propTypes: {
@@ -20,6 +21,20 @@ const NewsItem = React.createClass({
     renderTimeSpent: PropTypes.func.isRequired,
   },
 
+  getHintInfo() {
+    return `Тип: новость\nid:${this.props.newsItem.id}`
+  },
+
+  handleMouseEnter() {
+    this.props.startCountTime()
+    this.props.showHintInfo(this.getHintInfo())
+  },
+
+  handleMouseLeave() {
+    this.props.stopCountTime()
+    this.props.hideHintInfo()
+  },
+
   render() {
     var className = 'news-item';
 
@@ -32,8 +47,8 @@ const NewsItem = React.createClass({
 
     const props = {
       className,
-      onMouseEnter: this.props.startCountTime,
-      onMouseLeave: this.props.stopCountTime,
+      onMouseEnter: this.handleMouseEnter,
+      onMouseLeave: this.handleMouseLeave,
     }
 
     return (
@@ -88,4 +103,4 @@ const NewsItem = React.createClass({
   }
 })
 
-export default timeSpent(NewsItem)
+export default timeSpent(hintInfo(NewsItem))
