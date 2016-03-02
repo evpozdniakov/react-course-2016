@@ -4,6 +4,8 @@ import React, {PropTypes} from 'react'
 import NewsComments from 'components/newsComments'
 import timeSpent from 'HOC/timeSpent'
 import hintInfo from 'HOC/hintInfo'
+import markAsRead from 'HOC/markAsRead'
+import {markNewsAsRead} from 'actions/news'
 
 const NewsItem = React.createClass({
   propTypes: {
@@ -21,6 +23,7 @@ const NewsItem = React.createClass({
     startCountTime: PropTypes.func.isRequired,
     stopCountTime: PropTypes.func.isRequired,
     renderTimeSpent: PropTypes.func.isRequired,
+    renderReadBtn: PropTypes.func.isRequired,
   },
 
   getHintInfo() {
@@ -35,6 +38,10 @@ const NewsItem = React.createClass({
   handleMouseLeave() {
     this.props.stopCountTime()
     this.props.hideHintInfo()
+  },
+
+  handleMarkAsRead() {
+    markNewsAsRead(this.props.newsItem.id)
   },
 
   render() {
@@ -55,6 +62,7 @@ const NewsItem = React.createClass({
 
     return (
       <div {...props}>
+        {this.props.renderReadBtn(this.handleMarkAsRead)}
         {this.renderDate()}
         {this.renderTitle()}
         {this.renderContent()}
@@ -97,7 +105,7 @@ const NewsItem = React.createClass({
 
   renderComments() {
     const props = {
-      comments: this.props.newsItem.comments,
+      comments: [], // fixme: get comments related to news item
       toggleNewsComments: this.props.toggleNewsComments
     }
 
@@ -105,4 +113,4 @@ const NewsItem = React.createClass({
   }
 })
 
-export default timeSpent(hintInfo(NewsItem))
+export default markAsRead(timeSpent(hintInfo(NewsItem)))

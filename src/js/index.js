@@ -6,7 +6,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import NewsList from 'components/newsList'
 
-const newsData = require('json!./news.json')
-const newsList = React.createElement(NewsList, {newsData: newsData});
+const newsList = React.createElement(NewsList);
 
 ReactDOM.render(newsList, document.querySelector('#news-ctnr'));

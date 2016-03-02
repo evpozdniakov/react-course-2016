@@ -10,6 +10,10 @@ export default OriginalComponent => {
 			this.state = {mlsSpent: 0}
 		}
 
+		componentWillUnmount() {
+			this.stopCountTime()
+		}
+
 		startCountTime() {
 			this._mark = new Date()
 			this._mlsSpent = this.state.mlsSpent
@@ -20,7 +24,10 @@ export default OriginalComponent => {
 		}
 
 		stopCountTime() {
-			clearInterval(this._timer)
+			if (this._timer) {
+				clearInterval(this._timer)
+				this._timer = null
+			}
 		}
 
 		timeSpentToString() {

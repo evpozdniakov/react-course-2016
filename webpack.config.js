@@ -20,6 +20,10 @@ module.exports = {
 		alias: {
 			components: path.resolve(__dirname, 'src/js/components'),
 			HOC: path.resolve(__dirname, 'src/js/HOC'),
+			actions: path.resolve(__dirname, 'src/js/actions'),
+			dispatcher: path.resolve(__dirname, 'src/js/dispatcher'),
+			stores: path.resolve(__dirname, 'src/js/stores'),
+			data: path.resolve(__dirname, 'src/js/data'),
 		}
 	},
 

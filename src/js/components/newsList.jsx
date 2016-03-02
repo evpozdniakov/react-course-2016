@@ -2,19 +2,29 @@
 
 import React from 'react'
 import NewsItem from 'components/newsItem'
+import {newsStore} from 'stores'
 
 const NewsList = React.createClass({
-  propTypes: {
-    newsData: React.PropTypes.arrayOf(React.PropTypes.shape({
-      id: React.PropTypes.number.isRequired
-    }))
-  },
-
   getInitialState() {
     return {
+      newsData: newsStore.getAllUnread(),
       expandedItemId: -1,
       commentsShown: false,
     }
+  },
+
+  componentDidMount() {
+    newsStore.addEventListener(this.change)
+  },
+
+  componentWillUnmount() {
+    newsStore.remveEventListener(this.change)
+  },
+
+  change() {
+    this.setState({
+      newsData: newsStore.getAllUnread()
+    })
   },
 
   getToggleNewsContentHandler(id) {
@@ -35,7 +45,7 @@ const NewsList = React.createClass({
   },
 
   render() {
-    const items = this.props.newsData.map(newsItem => {
+    const items = this.state.newsData.map(newsItem => {
       newsItem.isExpanded = newsItem.id === this.state.expandedItemId
       newsItem.commentsShown = newsItem.isExpanded && this.state.commentsShown 
 

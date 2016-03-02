@@ -3,10 +3,12 @@
 import React, {PropTypes} from 'react'
 import timeSpent from 'HOC/timeSpent'
 import hintInfo from 'HOC/hintInfo'
+import {deleteComment} from 'actions/comments'
 
 const NewsComment = React.createClass({
   propTypes: {
     comment: PropTypes.shape({
+      id: PropTypes.number.isRequired,
       author: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired,
     }),
@@ -31,6 +33,11 @@ const NewsComment = React.createClass({
     this.props.hideHintInfo()
   },
 
+  removeComment(ev) {
+    ev.preventDefault()
+    deleteComment(this.props.comment.id)
+  },
+
   render() {
     const props = {
       className: 'news-comment',
@@ -42,6 +49,7 @@ const NewsComment = React.createClass({
       <div {...props}>
         {this.renderAuthor()}
         {this.renderText()}
+        {this.renderRemoveBtn()}
         {this.props.renderTimeSpent()}
       </div>
     )
@@ -60,6 +68,12 @@ const NewsComment = React.createClass({
       <div className="comment-text">
         {this.props.comment.text}
       </div>
+    )
+  },
+
+  renderRemoveBtn() {
+    return (
+      <button onClick={this.removeComment}>&times;</button>
     )
   }
 })
