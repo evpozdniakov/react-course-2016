@@ -58,6 +58,11 @@ module.exports = {
 					cacheDirectory: true,
 					presets: ['es2015', 'stage-0', 'react'],
 				},
+			}, {
+				test: /\.css$/,
+				include: path.resolve(__dirname, 'src/js'),
+				exclude: path.resolve(__dirname, 'node_modules'),
+				loader: 'style!css',
 			},
 		]
 	},

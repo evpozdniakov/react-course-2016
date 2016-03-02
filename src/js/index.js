@@ -1,6 +1,6 @@
 'use strict'
 
-require('!style!css!components/news.css')
+require('components/news.css')
 
 import React from 'react'
 import ReactDOM from 'react-dom'

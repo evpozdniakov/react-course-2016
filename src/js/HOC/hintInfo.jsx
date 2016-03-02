@@ -1,6 +1,6 @@
 'use strict'
 
-require('!style!css!HOC/hintInfo.css')
+require('HOC/hintInfo.css')
 
 import React, {Component} from 'react'
 import $ from 'jquery'
