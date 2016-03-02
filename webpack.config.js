@@ -24,6 +24,7 @@ module.exports = {
 			dispatcher: path.resolve(__dirname, 'src/js/dispatcher'),
 			stores: path.resolve(__dirname, 'src/js/stores'),
 			data: path.resolve(__dirname, 'src/js/data'),
+			constants: path.resolve(__dirname, 'src/js/constants'),
 		}
 	},
 

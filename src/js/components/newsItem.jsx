@@ -62,12 +62,12 @@ const NewsItem = React.createClass({
 
     return (
       <div {...props}>
+        {this.props.renderTimeSpent()}
         {this.props.renderReadBtn(this.handleMarkAsRead)}
         {this.renderDate()}
         {this.renderTitle()}
         {this.renderContent()}
         {this.renderComments()}
-        {this.props.renderTimeSpent()}
       </div>
     )
   },
