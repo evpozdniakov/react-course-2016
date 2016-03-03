@@ -7,6 +7,7 @@ class SimpleStore extends EventEmitter {
 
     this._stores = stores
     this._items = []
+    this._maxId = 0
 
     data.forEach(itemData => {
       this.addItem(itemData)
@@ -31,6 +32,7 @@ class SimpleStore extends EventEmitter {
 
   addItem(itemData) {
     this._items.push(new Model(itemData, this._stores))
+    this._maxId = itemData.id
   }
 
   getItem = (id) => {
@@ -40,11 +42,15 @@ class SimpleStore extends EventEmitter {
   }
 
   getAll() {
-    return this._items
+    return this._items.slice()
   }
 
   deleteItem(id) {
     this._items = this._items.filter(itemData => itemData.id !== id)
+  }
+
+  generateNextId() {
+    return ++this._maxId
   }
 }
 

@@ -15,7 +15,12 @@ export default class Model {
 
     const filterFn = this._getFilterFn(filter)
 
-    return this[type].map(this._stores[type].getItem).filter(filterFn)
+    return this[type].map(id => {
+      return {
+        ...this._stores[type].getItem(id),
+        parentId: this.id,
+      }
+    }).filter(filterFn)
   }
 
   _getFilterFn(filter) {

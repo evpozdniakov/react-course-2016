@@ -4,4 +4,5 @@ export const DELETE_NEWS_ITEM  = 'DELETE_NEWS_ITEM'
 
 /* comments */
 export const MARK_COMMENT_AS_READ = 'MARK_COMMENT_AS_READ'
+export const POST_COMMENT = 'POST_COMMENT'
 export const DELETE_COMMENT = 'DELETE_COMMENT'

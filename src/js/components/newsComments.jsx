@@ -3,10 +3,11 @@
 import React, {PropTypes} from 'react'
 import NewsComment from 'components/newsComment'
 import addComment from 'HOC/addComment'
-// import {POST_COMMENT} from 'actions/comments'
+import {postComment} from 'actions/comments'
 
 const NewsComments = React.createClass({
   propTypes: {
+    newsId: PropTypes.number.isRequired,
     toggleNewsComments: PropTypes.func.isRequired,
     comments: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number.isRequired
@@ -14,8 +15,13 @@ const NewsComments = React.createClass({
     renderAddCommentUI: PropTypes.func.isRequired,
   },
 
-  handlePostComment(comment) {
-    console.log('--- post new comment: ', comment);
+  handlePostComment(text) {
+    const data = {
+      newsId: this.props.newsId,
+      author: 'anonymous',
+      text: text
+    }
+    postComment(data)
   },
 
   render() {
