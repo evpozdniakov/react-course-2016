@@ -52,6 +52,16 @@ class SimpleStore extends EventEmitter {
   generateNextId() {
     return ++this._maxId
   }
+
+  getLastId() {
+    const lastItem = this._items[this._items.length - 1]
+
+    if (!lastItem) {
+      return 0
+    }
+
+    return lastItem.id
+  }
 }
 
 export default SimpleStore

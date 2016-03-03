@@ -16,9 +16,14 @@ export default class NewsStore extends NewsPartStore {
           break
 
         case POST_COMMENT:
-          const newCommentId = this.generateNextId()
+          AppDispatcher.waitFor([this._stores.comments.dispatchToken])
+
           const newsItem = this.getItem(data.newsId)
-          newsItem.comments.push(newCommentId)
+          const lastCommentId = this._stores.comments.getLastId()
+
+          newsItem.comments.push(lastCommentId)
+
+          this.change()
           break
 
         case DELETE_NEWS_ITEM:
