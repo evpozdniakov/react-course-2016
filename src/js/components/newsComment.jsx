@@ -64,7 +64,7 @@ const NewsComment = React.createClass({
   renderAuthor() {
     return (
       <div className="comment-author">
-        {this.props.comment.author}
+        {this.props.comment.author || '—incognito—'}
       </div>
     )
   },

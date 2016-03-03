@@ -1,6 +1,6 @@
 'use strict'
 
-// import './style.css'
+import './style.css'
 import React, {Component} from 'react'
 
 export default OriginalComponent => {
@@ -10,7 +10,8 @@ export default OriginalComponent => {
 
       this.state = {
         isShown: false,
-        text: ''
+        text: '',
+        author: '',
       }
     }
 
@@ -19,11 +20,24 @@ export default OriginalComponent => {
     }
 
     handlePostComment() {
-      this.callback(this.state.text)
+      if (!this.state.text) {
+        alert('Text missing') // FIXME
+        return
+      }
+
+      this.callback({
+        author: this.state.author,
+        text: this.state.text,
+      })
+
       this.setState({
         isShown: false,
         text: '',
       })
+    }
+
+    handleChangeAuthor(ev) {
+      this.setState({author: ev.target.value})
     }
 
     handleChangeText(ev) {
@@ -40,7 +54,8 @@ export default OriginalComponent => {
       return (
         <div {...props}>
           {this.renderToggleBtn()}
-          {this.renderTextarea()}
+          {this.renderInputAuthor()}
+          {this.renderInputText()}
           {this.renderPostBtn()}
         </div>
       )
@@ -55,12 +70,29 @@ export default OriginalComponent => {
       return <button {...props}>+ comment</button>
     }
 
-    renderTextarea() {
+    renderInputAuthor() {
       if (!this.state.isShown) {
         return null
       }
 
       const props = {
+        className: 'input author',
+        placeholder: 'your name',
+        onChange: this.handleChangeAuthor.bind(this),
+        value: this.state.author,
+      }
+
+      return <input {...props} />
+    }
+
+    renderInputText() {
+      if (!this.state.isShown) {
+        return null
+      }
+
+      const props = {
+        className: 'input text',
+        placeholder: 'your comment',
         onChange: this.handleChangeText.bind(this),
         value: this.state.text,
       }

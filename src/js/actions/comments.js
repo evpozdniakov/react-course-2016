@@ -9,6 +9,10 @@ export const markCommentAsRead = (id) => {
 }
 
 export const postComment = ({newsId, author, text}) => {
+  if (!text || !newsId) {
+    return
+  }
+
   AppDispatcher.dispatch({
     type: POST_COMMENT,
     data: {newsId, author, text},

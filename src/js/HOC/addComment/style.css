@@ -1,0 +1,13 @@
+.add-comment-ui {
+	margin: 1rem 0;
+}
+
+.add-comment-ui .input {
+	margin: .5rem 0;
+	display: block;
+}
+
+.add-comment-ui .text {
+	width: 50%;
+	height: 4em;
+}

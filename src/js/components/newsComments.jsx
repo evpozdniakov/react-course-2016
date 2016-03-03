@@ -15,12 +15,13 @@ const NewsComments = React.createClass({
     renderAddCommentUI: PropTypes.func.isRequired,
   },
 
-  handlePostComment(text) {
+  handlePostComment({author, text}) {
     const data = {
       newsId: this.props.newsId,
-      author: 'anonymous',
-      text: text
+      author ,
+      text
     }
+
     postComment(data)
   },
 
@@ -31,14 +32,14 @@ const NewsComments = React.createClass({
 
     return (
       <div {...props}>
-        {this.renderToggle()}
         {this.props.renderAddCommentUI(this.handlePostComment)}
+        {this.renderToggleList()}
         {this.renderList()}
       </div>
     )
   },
 
-  renderToggle() {
+  renderToggleList() {
     const props = {
       className: 'comments-toggle',
       onClick: this.props.toggleNewsComments
