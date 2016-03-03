@@ -5,8 +5,10 @@ import comments from 'data/comments'
 
 const stores = {}
 
-stores.newsStore = new NewsStore(news, stores)
-stores.commentStore = new CommentStore(comments, stores)
+stores.news = new NewsStore(news, stores)
+stores.comments = new CommentStore(comments, stores)
 
-export const newsStore = stores.newsStore
-export const commentStore = stores.commentStore
+window.stores = stores
+
+export const newsStore = stores.news
+export const commentStore = stores.comments

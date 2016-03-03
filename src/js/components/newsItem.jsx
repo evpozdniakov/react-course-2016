@@ -105,7 +105,7 @@ const NewsItem = React.createClass({
 
   renderComments() {
     const props = {
-      comments: [], // fixme: get comments related to news item
+      comments: this.props.newsItem.getRelation('comments'),
       toggleNewsComments: this.props.toggleNewsComments
     }
 

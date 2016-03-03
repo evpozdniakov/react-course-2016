@@ -1,4 +1,5 @@
 import {EventEmitter} from 'events'
+import Model from './model'
 
 class SimpleStore extends EventEmitter {
   constructor(data, stores) {
@@ -29,10 +30,10 @@ class SimpleStore extends EventEmitter {
   }
 
   addItem(itemData) {
-    this._items.push(itemData)
+    this._items.push(new Model(itemData, this._stores))
   }
 
-  getItem(id) {
+  getItem = (id) => {
     const filtered = this._items.filter(itemData => itemData.id === id)
 
     return filtered.length === 1 ? filtered[0] : null
