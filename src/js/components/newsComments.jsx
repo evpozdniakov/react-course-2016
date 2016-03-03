@@ -1,21 +1,24 @@
 'use strict'
 
-import React from 'react'
+import React, {PropTypes} from 'react'
 import NewsComment from 'components/newsComment'
+import addComment from 'HOC/addComment'
+// import {POST_COMMENT} from 'actions/comments'
 
 const NewsComments = React.createClass({
   propTypes: {
-    toggleNewsComments: React.PropTypes.func.isRequired,
-    comments: React.PropTypes.arrayOf(React.PropTypes.shape({
-      id: React.PropTypes.number.isRequired
-    })).isRequired
+    toggleNewsComments: PropTypes.func.isRequired,
+    comments: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired
+    })).isRequired,
+    renderAddCommentUI: PropTypes.func.isRequired,
+  },
+
+  handlePostComment(comment) {
+    console.log('--- post new comment: ', comment);
   },
 
   render() {
-    if (this.props.comments.length === 0) {
-      return null      
-    }
-
     const props = {
       className: 'news-comments',
     }
@@ -23,6 +26,7 @@ const NewsComments = React.createClass({
     return (
       <div {...props}>
         {this.renderToggle()}
+        {this.props.renderAddCommentUI(this.handlePostComment)}
         {this.renderList()}
       </div>
     )
@@ -59,4 +63,4 @@ const NewsComments = React.createClass({
   }
 })
 
-export default NewsComments
+export default addComment(NewsComments)
