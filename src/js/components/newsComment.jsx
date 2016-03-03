@@ -3,7 +3,8 @@
 import React, {PropTypes} from 'react'
 import timeSpent from 'HOC/timeSpent'
 import hintInfo from 'HOC/hintInfo'
-import {deleteComment} from 'actions/comments'
+import markAsRead from 'HOC/markAsRead'
+import {deleteComment, markCommentAsRead} from 'actions/comments'
 
 const NewsComment = React.createClass({
   propTypes: {
@@ -17,6 +18,7 @@ const NewsComment = React.createClass({
     renderTimeSpent: PropTypes.func.isRequired,
     showHintInfo: PropTypes.func.isRequired,
     hideHintInfo: PropTypes.func.isRequired,
+    renderReadBtn: PropTypes.func.isRequired,
   },
 
   getHintInfo() {
@@ -33,6 +35,10 @@ const NewsComment = React.createClass({
     this.props.hideHintInfo()
   },
 
+  handleMarkAsRead() {
+    markCommentAsRead(this.props.comment.id)
+  },
+
   removeComment(ev) {
     ev.preventDefault()
     deleteComment(this.props.comment.id)
@@ -47,10 +53,10 @@ const NewsComment = React.createClass({
 
     return (
       <div {...props}>
+        {this.props.renderTimeSpent()}
+        {this.props.renderReadBtn(this.handleMarkAsRead)}
         {this.renderAuthor()}
         {this.renderText()}
-        {this.renderRemoveBtn()}
-        {this.props.renderTimeSpent()}
       </div>
     )
   },
@@ -69,13 +75,7 @@ const NewsComment = React.createClass({
         {this.props.comment.text}
       </div>
     )
-  },
-
-  renderRemoveBtn() {
-    return (
-      <button onClick={this.removeComment}>&times;</button>
-    )
   }
 })
 
-export default timeSpent(hintInfo(NewsComment))
+export default markAsRead(timeSpent(hintInfo(NewsComment)))

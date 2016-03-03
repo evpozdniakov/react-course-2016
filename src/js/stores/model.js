@@ -4,7 +4,7 @@ export default class Model {
     this._stores = stores
   }
 
-  getRelation(type) {
+  getRelation(type, filter) {
     if (!this[type]) {
       return []
     }
@@ -13,6 +13,16 @@ export default class Model {
       return []
     }
 
-    return this[type].map(this._stores[type].getItem)
+    const filterFn = this._getFilterFn(filter)
+
+    return this[type].map(this._stores[type].getItem).filter(filterFn)
+  }
+
+  _getFilterFn(filter) {
+    return (item) => {
+      return Object.keys(filter).reduce((bool, key) => {
+        return bool && (item[key] === filter[key])
+      }, true)
+    }
   }
 }

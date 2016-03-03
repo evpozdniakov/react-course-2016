@@ -1,5 +1,12 @@
 import AppDispatcher from 'dispatcher'
-import {DELETE_COMMENT} from 'constants'
+import {MARK_COMMENT_AS_READ, DELETE_COMMENT} from 'constants'
+
+export const markCommentAsRead = (id) => {
+  AppDispatcher.dispatch({
+    type: MARK_COMMENT_AS_READ,
+    data: {id}
+  })
+}
 
 export const deleteComment = (id) => {
   AppDispatcher.dispatch({
