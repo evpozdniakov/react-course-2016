@@ -1,7 +1,10 @@
 'use strict'
 
-const path = require('path');
-const webpack = require('webpack');
+const path = require('path')
+const webpack = require('webpack')
+const NODE_ENV = process.env.NODE_ENV || 'development'
+const DEVELOPMENT = NODE_ENV === 'development'
+const PRODUCTION = !DEVELOPMENT
 
 module.exports = {
 	context: path.resolve(__dirname, 'src/js'),
@@ -42,22 +45,13 @@ module.exports = {
 	module: {
 		loaders: [
 			{
-				test: /\.js$/,
+				test: /\.jsx?$/,
 				include: path.resolve(__dirname, 'src/js'),
 				exclude: path.resolve(__dirname, 'node_modules'),
 				loader: 'babel',
 				query: {
 					cacheDirectory: true,
-					presets: ['es2015', 'stage-0'],
-				},
-			}, {
-				test: /\.jsx$/,
-				include: path.resolve(__dirname, 'src/js'),
-				exclude: path.resolve(__dirname, 'node_modules'),
-				loader: 'babel',
-				query: {
-					cacheDirectory: true,
-					presets: ['es2015', 'stage-0', 'react'],
+					presets: ['es2015', 'stage-0', 'react'].concat(DEVELOPMENT ? 'react-hmre' : ''),
 				},
 			}, {
 				test: /\.css$/,
@@ -73,4 +67,4 @@ module.exports = {
 		moduleTemplates: ['*-loader', '*'],
 		extensions: ['', '.js'],
 	}
-};
+}
