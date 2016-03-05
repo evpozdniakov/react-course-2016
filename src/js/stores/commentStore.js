@@ -16,13 +16,13 @@ export default class CommentStore extends NewsPartStore {
           break
 
         case POST_COMMENT:
-          const newCommentId = this.generateNextId()
+          let { commentId, author, text, isRead } = data
 
           this.addItem({
-            id: newCommentId,
-            author: data.author,
-            text: data.text,
-            isRead: false
+            id: commentId,
+            author,
+            text,
+            isRead,
           })
 
           break

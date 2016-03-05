@@ -28,6 +28,7 @@ module.exports = {
 			stores: path.resolve(__dirname, 'src/js/stores'),
 			data: path.resolve(__dirname, 'src/js/data'),
 			constants: path.resolve(__dirname, 'src/js/constants'),
+			utils: path.resolve(__dirname, 'src/js/utils'),
 		}
 	},
 

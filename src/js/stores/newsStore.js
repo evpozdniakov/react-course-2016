@@ -18,10 +18,10 @@ export default class NewsStore extends NewsPartStore {
         case POST_COMMENT:
           AppDispatcher.waitFor([this._stores.comments.dispatchToken])
 
-          const newsItem = this.getItem(data.newsId)
-          const lastCommentId = this._stores.comments.getLastId()
+          let { commentId, newsId } = data
 
-          newsItem.comments.push(lastCommentId)
+          let newsItem = this.getItem(newsId)
+          newsItem.comments.push(commentId)
 
           this.change()
           break
