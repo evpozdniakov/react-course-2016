@@ -744,4 +744,4 @@ const news = [
   }
 ]
 
-export default news
+module.exports = news

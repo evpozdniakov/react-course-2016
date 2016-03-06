@@ -1051,4 +1051,4 @@ const comments = [
   }
 ]
 
-export default comments
+module.exports = comments
