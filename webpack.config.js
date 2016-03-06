@@ -44,7 +44,7 @@ module.exports = {
 		aggregateTimeout: 100,
 	},
 
-	devtool: 'source-map',
+	devtool: 'eval',
 
 	plugins: [
 		new webpack.NoErrorsPlugin(),

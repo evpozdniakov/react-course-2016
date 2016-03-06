@@ -3,7 +3,7 @@
 import React from 'react'
 import NewsItem from 'components/newsItem'
 import {newsStore} from 'stores'
-import {loadAllNews} from 'actions/api/news'
+import {loadAllNews} from 'actions/news'
 
 const NewsList = React.createClass({
   getInitialState() {

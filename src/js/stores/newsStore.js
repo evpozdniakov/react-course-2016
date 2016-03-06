@@ -1,6 +1,6 @@
 import NewsPartStore from 'stores/newsPartStore'
 import AppDispatcher from 'dispatcher'
-import { MARK_NEWS_AS_READ, POST_COMMENT, DELETE_NEWS_ITEM, LOAD_ALL_NEWS_START, LOAD_ALL_NEWS_SUCCESS, LOAD_ALL_NEWS_FAIL } from 'constants'
+import { MARK_NEWS_AS_READ, POST_COMMENT, DELETE_NEWS_ITEM, LOAD_ALL_NEWS, _START, _DONE, _FAIL } from 'constants'
 
 export default class NewsStore extends NewsPartStore {
   constructor(...args) {
@@ -31,20 +31,25 @@ export default class NewsStore extends NewsPartStore {
           this.change()
           break
 
-        case LOAD_ALL_NEWS_START:
+        case LOAD_ALL_NEWS + _START:
           this.loading = true
           this.loaded = false
           this.change()
           break
 
-        case LOAD_ALL_NEWS_SUCCESS:
-          data.news.map(Object.assign(this.addItem, {isRead: false}))
+        case LOAD_ALL_NEWS + _DONE:
+          data.response.map(newsItem => {
+            this.addItem({
+              ...newsItem,
+              isRead: false
+            })
+          })
           this.loading = false
           this.loaded = true
           this.change()
           break
 
-        case LOAD_ALL_NEWS_FAIL:
+        case LOAD_ALL_NEWS + _FAIL:
           this.loading = false
           this.loaded = false
           this.change()
