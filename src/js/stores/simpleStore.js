@@ -2,16 +2,14 @@ import {EventEmitter} from 'events'
 import Model from './model'
 
 class SimpleStore extends EventEmitter {
-  constructor(data, stores) {
+  constructor(stores, data=[]) {
     super()
 
     this._stores = stores
     this._items = []
     this._maxId = 0
 
-    data.forEach(itemData => {
-      this.addItem(itemData)
-    })
+    data.forEach(this.addItem)
   }
 
   change() {
@@ -30,7 +28,7 @@ class SimpleStore extends EventEmitter {
     console.log('--- store will delete item by id', id);
   }
 
-  addItem(itemData) {
+  addItem = (itemData) => {
     this._items.push(new Model(itemData, this._stores))
     this._maxId = itemData.id
   }

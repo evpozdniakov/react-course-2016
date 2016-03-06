@@ -1,12 +1,10 @@
 import NewsStore from 'stores/newsStore'
 import CommentStore from 'stores/commentStore'
-import news from 'data/news'
-import comments from 'data/comments'
 
 const stores = {}
 
-stores.news = new NewsStore(news, stores)
-stores.comments = new CommentStore(comments, stores)
+stores.news = new NewsStore(stores)
+stores.comments = new CommentStore(stores)
 
 window.stores = stores
 

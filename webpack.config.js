@@ -17,6 +17,13 @@ module.exports = {
 		filename: '[name].js',
 	},
 
+  devServer: {
+      proxy: [{
+          path: '/api/*',
+          target: 'http://localhost:3001'
+      }]
+  },
+
 	resolve: {
 		modulesDirectories: ['node_modules'], // user resolve.root as alternative
 		extensions: ['', '.js', '.jsx'],
@@ -32,10 +39,10 @@ module.exports = {
 		}
 	},
 
-	/*watch: true,
+	watch: true,
 	watchOptions: {
 		aggregateTimeout: 100,
-	},*/
+	},
 
 	devtool: 'source-map',
 

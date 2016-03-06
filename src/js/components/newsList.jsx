@@ -3,6 +3,7 @@
 import React from 'react'
 import NewsItem from 'components/newsItem'
 import {newsStore} from 'stores'
+import {loadAllNews} from 'actions/api/news'
 
 const NewsList = React.createClass({
   getInitialState() {
@@ -15,6 +16,7 @@ const NewsList = React.createClass({
 
   componentDidMount() {
     newsStore.addEventListener(this.change)
+    loadAllNews()
   },
 
   componentWillUnmount() {
