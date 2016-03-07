@@ -1,6 +1,7 @@
 /* news */
 export const MARK_NEWS_AS_READ = 'MARK_NEWS_AS_READ'
 export const DELETE_NEWS_ITEM  = 'DELETE_NEWS_ITEM'
+export const TOGGLE_SHOW_NEWS_ITEM = 'TOGGLE_SHOW_NEWS_ITEM'
 export const LOAD_ALL_NEWS = 'LOAD_ALL_NEWS'
 export const _START = '_START'
 export const _DONE = '_DONE'

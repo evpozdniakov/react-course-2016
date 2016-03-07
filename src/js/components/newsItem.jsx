@@ -5,7 +5,7 @@ import NewsComments from 'components/newsComments'
 import timeSpent from 'HOC/timeSpent'
 import hintInfo from 'HOC/hintInfo'
 import markAsRead from 'HOC/markAsRead'
-import {markNewsAsRead} from 'actions/news'
+import { markNewsAsRead, toggleShowNewsItem } from 'actions/news'
 
 const NewsItem = React.createClass({
   propTypes: {
@@ -18,7 +18,6 @@ const NewsItem = React.createClass({
       isExpanded: PropTypes.bool.isRequired,
       commentsShown: PropTypes.bool.isRequired
     }).isRequired,
-    toggleNewsContent: PropTypes.func.isRequired,
     toggleNewsComments: PropTypes.func.isRequired,
     startCountTime: PropTypes.func.isRequired,
     stopCountTime: PropTypes.func.isRequired,
@@ -42,6 +41,10 @@ const NewsItem = React.createClass({
 
   handleMarkAsRead() {
     markNewsAsRead(this.props.newsItem.id)
+  },
+
+  handleToggleNewsContent() {
+    toggleShowNewsItem(this.props.newsItem.id)
   },
 
   render() {
@@ -85,7 +88,7 @@ const NewsItem = React.createClass({
 
     const props = {
       className: 'news-title',
-      onClick: this.props.toggleNewsContent
+      onClick: this.handleToggleNewsContent
     }
 
     return (
