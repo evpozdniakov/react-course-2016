@@ -2,7 +2,6 @@
 
 import React, {PropTypes} from 'react'
 import timeSpent from 'HOC/timeSpent'
-import hintInfo from 'HOC/hintInfo'
 import markAsRead from 'HOC/markAsRead'
 import {deleteComment, markCommentAsRead} from 'actions/comments'
 
@@ -16,23 +15,15 @@ const NewsComment = React.createClass({
     startCountTime: PropTypes.func.isRequired,
     stopCountTime: PropTypes.func.isRequired,
     renderTimeSpent: PropTypes.func.isRequired,
-    showHintInfo: PropTypes.func.isRequired,
-    hideHintInfo: PropTypes.func.isRequired,
     renderReadBtn: PropTypes.func.isRequired,
-  },
-
-  getHintInfo() {
-    return `Тип: комментарий\nid:${this.props.comment.id}`
   },
 
   handleMouseEnter() {
     this.props.startCountTime()
-    this.props.showHintInfo(this.getHintInfo())
   },
 
   handleMouseLeave() {
     this.props.stopCountTime()
-    this.props.hideHintInfo()
   },
 
   handleMarkAsRead() {
@@ -78,4 +69,4 @@ const NewsComment = React.createClass({
   }
 })
 
-export default markAsRead(timeSpent(hintInfo(NewsComment)))
+export default markAsRead(timeSpent(NewsComment))

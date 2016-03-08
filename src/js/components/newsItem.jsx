@@ -3,7 +3,6 @@
 import React, {PropTypes} from 'react'
 import NewsComments from 'components/newsComments'
 import timeSpent from 'HOC/timeSpent'
-import hintInfo from 'HOC/hintInfo'
 import markAsRead from 'HOC/markAsRead'
 import { markNewsAsRead, toggleShowNewsItem } from 'actions/news'
 
@@ -25,18 +24,12 @@ const NewsItem = React.createClass({
     renderReadBtn: PropTypes.func.isRequired,
   },
 
-  getHintInfo() {
-    return `Тип: новость\nid:${this.props.newsItem.id}`
-  },
-
   handleMouseEnter() {
     this.props.startCountTime()
-    this.props.showHintInfo(this.getHintInfo())
   },
 
   handleMouseLeave() {
     this.props.stopCountTime()
-    this.props.hideHintInfo()
   },
 
   handleMarkAsRead() {
@@ -117,4 +110,4 @@ const NewsItem = React.createClass({
   }
 })
 
-export default markAsRead(timeSpent(hintInfo(NewsItem)))
+export default markAsRead(timeSpent(NewsItem))
