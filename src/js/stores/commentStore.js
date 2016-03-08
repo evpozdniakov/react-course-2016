@@ -1,6 +1,6 @@
 import NewsPartStore from 'stores/newsPartStore'
 import AppDispatcher from 'dispatcher'
-import {MARK_COMMENT_AS_READ, POST_COMMENT, DELETE_COMMENT} from 'constants'
+import {MARK_AS_READ, POST, DELETE, _COMMENT} from 'constants'
 
 export default class CommentStore extends NewsPartStore {
   constructor(...args) {
@@ -10,12 +10,12 @@ export default class CommentStore extends NewsPartStore {
       const {type, data} = action
 
       switch(type) {
-        case MARK_COMMENT_AS_READ:
+        case MARK_AS_READ + _COMMENT:
           this.markAsRead(data.id)
           this.change()
           break
 
-        case POST_COMMENT:
+        case POST + _COMMENT:
           let { commentId, author, text, isRead } = data
 
           this.addItem({
@@ -27,7 +27,7 @@ export default class CommentStore extends NewsPartStore {
 
           break
 
-        case DELETE_COMMENT:
+        case DELETE + _COMMENT:
           this.deleteItem(data.id)
           this.change()
           break

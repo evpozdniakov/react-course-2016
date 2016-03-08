@@ -1,13 +1,19 @@
+/* action */
+export const MARK_AS_READ = 'MARK_AS_READ'
+export const LOAD         = 'LOAD'
+export const DELETE       = 'DELETE'
+export const TOGGLE_SHOW  = 'TOGGLE_SHOW'
+export const POST         = 'POST'
+
 /* news */
-export const MARK_NEWS_AS_READ = 'MARK_NEWS_AS_READ'
-export const DELETE_NEWS_ITEM  = 'DELETE_NEWS_ITEM'
-export const TOGGLE_SHOW_NEWS_ITEM = 'TOGGLE_SHOW_NEWS_ITEM'
-export const LOAD_ALL_NEWS = 'LOAD_ALL_NEWS'
-export const _START = '_START'
-export const _DONE = '_DONE'
-export const _FAIL = '_FAIL'
+export const _ALL_NEWS  = '_ALL_NEWS'
+export const _NEWS_ITEM = '_NEWS_ITEM'
 
 /* comments */
-export const MARK_COMMENT_AS_READ = 'MARK_COMMENT_AS_READ'
-export const POST_COMMENT = 'POST_COMMENT'
-export const DELETE_COMMENT = 'DELETE_COMMENT'
+export const _ALL_COMMENTS = '_ALL_COMMENTS'
+export const _COMMENT      = '_COMMENT'
+
+/* postfix */
+export const _START = '_START'
+export const _DONE  = '_DONE'
+export const _FAIL  = '_FAIL'

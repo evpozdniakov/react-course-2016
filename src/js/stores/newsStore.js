@@ -1,6 +1,6 @@
 import NewsPartStore from 'stores/newsPartStore'
 import AppDispatcher from 'dispatcher'
-import { MARK_NEWS_AS_READ, POST_COMMENT, DELETE_NEWS_ITEM, LOAD_ALL_NEWS, _START, _DONE, _FAIL, TOGGLE_SHOW_NEWS_ITEM } from 'constants'
+import { MARK_AS_READ, POST, DELETE, LOAD, TOGGLE_SHOW, _NEWS_ITEM, _ALL_NEWS, _COMMENT, _START, _DONE, _FAIL } from 'constants'
 
 export default class NewsStore extends NewsPartStore {
   constructor(...args) {
@@ -10,12 +10,12 @@ export default class NewsStore extends NewsPartStore {
       const {type, data} = action
 
       switch(type) {
-        case MARK_NEWS_AS_READ:
+        case MARK_AS_READ + _NEWS_ITEM:
           this.markAsRead(data.id)
           this.change()
           break
 
-        case POST_COMMENT:
+        case POST + _COMMENT:
           AppDispatcher.waitFor([this._stores.comments.dispatchToken])
 
           let { commentId, newsId } = data
@@ -26,31 +26,31 @@ export default class NewsStore extends NewsPartStore {
           this.change()
           break
 
-        case DELETE_NEWS_ITEM:
+        case DELETE + _NEWS_ITEM:
           this.deleteItem(data.id)
           this.change()
           break
 
-        case LOAD_ALL_NEWS + _START:
+        case LOAD + _ALL_NEWS + _START:
           this.loading = true
           this.loaded = false
           this.change()
           break
 
-        case LOAD_ALL_NEWS + _DONE:
+        case LOAD + _ALL_NEWS + _DONE:
           data.response.map(this.addItem)
           this.loading = false
           this.loaded = true
           this.change()
           break
 
-        case LOAD_ALL_NEWS + _FAIL:
+        case LOAD + _ALL_NEWS + _FAIL:
           this.loading = false
           this.loaded = false
           this.change()
           break
 
-        case TOGGLE_SHOW_NEWS_ITEM:
+        case TOGGLE_SHOW + _NEWS_ITEM:
           this.toggleShowNewsItem(data)
           this.change()
           break

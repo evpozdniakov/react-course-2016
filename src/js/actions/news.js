@@ -1,21 +1,21 @@
 import AppDispatcher from 'dispatcher'
-import { MARK_NEWS_AS_READ, LOAD_ALL_NEWS, TOGGLE_SHOW_NEWS_ITEM } from 'constants'
+import { MARK_AS_READ, LOAD, TOGGLE_SHOW, _NEWS_ITEM, _ALL_NEWS } from 'constants'
 import loadFromAPI from 'actions/api'
 
 export function markNewsAsRead(id) {
   AppDispatcher.dispatch({
-    type: MARK_NEWS_AS_READ,
+    type: MARK_AS_READ + _NEWS_ITEM,
     data: {id}
   })
 }
 
 export function loadAllNews() {
-  loadFromAPI('/api/news', LOAD_ALL_NEWS)
+  loadFromAPI('/api/news', LOAD + _ALL_NEWS)
 }
 
 export function toggleShowNewsItem(id) {
   AppDispatcher.dispatch({
-    type: TOGGLE_SHOW_NEWS_ITEM,
+    type: TOGGLE_SHOW + _NEWS_ITEM,
     data: {id}
   })
 }

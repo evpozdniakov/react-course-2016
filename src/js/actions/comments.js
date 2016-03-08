@@ -1,10 +1,10 @@
 import AppDispatcher from 'dispatcher'
-import {MARK_COMMENT_AS_READ, POST_COMMENT, DELETE_COMMENT} from 'constants'
+import {MARK_AS_READ, POST, DELETE, _COMMENT} from 'constants'
 import { getRandomId } from 'utils'
 
 export const markCommentAsRead = (id) => {
   AppDispatcher.dispatch({
-    type: MARK_COMMENT_AS_READ,
+    type: MARK_AS_READ + _COMMENT,
     data: {id},
   })
 }
@@ -17,7 +17,7 @@ export const postComment = ({newsId, author, text}) => {
   const commentId = getRandomId()
 
   AppDispatcher.dispatch({
-    type: POST_COMMENT,
+    type: POST + _COMMENT,
     data: {
       commentId,
       newsId,
@@ -30,7 +30,7 @@ export const postComment = ({newsId, author, text}) => {
 
 export const deleteComment = (id) => {
   AppDispatcher.dispatch({
-    type: DELETE_COMMENT,
+    type: DELETE + _COMMENT,
     data: {id},
   })
 }
