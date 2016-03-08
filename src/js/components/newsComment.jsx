@@ -1,7 +1,6 @@
 'use strict'
 
 import React, {PropTypes} from 'react'
-import timeSpent from 'HOC/timeSpent'
 import markAsRead from 'HOC/markAsRead'
 import {deleteComment, markCommentAsRead} from 'actions/comments'
 
@@ -12,18 +11,7 @@ const NewsComment = React.createClass({
       author: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired,
     }),
-    startCountTime: PropTypes.func.isRequired,
-    stopCountTime: PropTypes.func.isRequired,
-    renderTimeSpent: PropTypes.func.isRequired,
     renderReadBtn: PropTypes.func.isRequired,
-  },
-
-  handleMouseEnter() {
-    this.props.startCountTime()
-  },
-
-  handleMouseLeave() {
-    this.props.stopCountTime()
   },
 
   handleMarkAsRead() {
@@ -38,13 +26,10 @@ const NewsComment = React.createClass({
   render() {
     const props = {
       className: 'news-comment',
-      onMouseEnter: this.handleMouseEnter,
-      onMouseLeave: this.handleMouseLeave,
     }
 
     return (
       <div {...props}>
-        {this.props.renderTimeSpent()}
         {this.props.renderReadBtn(this.handleMarkAsRead)}
         {this.renderAuthor()}
         {this.renderText()}
@@ -69,4 +54,4 @@ const NewsComment = React.createClass({
   }
 })
 
-export default markAsRead(timeSpent(NewsComment))
+export default markAsRead(NewsComment)
