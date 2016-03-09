@@ -3,22 +3,28 @@
   margin-top: 2rem;
 }
 .news-item:first-child {margin-top: 0;}
+
 .news-title {
-  color: #8C1818;
   font-size: 1.5rem;
   line-height: 1.5rem;
   cursor: pointer;
   display: inline-block;
-}
-.collapsed .news-title {
   color: #666;
 }
-.news-title span {
-  border-color: transparent;
+.expanded .news-title {
+  color: #8C1818;
 }
-.collapsed .news-title span {
+
+.news-title span {
   border-bottom: 2px dashed #666;
 }
+.expanded .news-title span {
+  border-color: transparent;
+}
+
 .news-content {
   padding-top: .5rem;
+}
+.news-content.hidden {
+  display: none;
 }

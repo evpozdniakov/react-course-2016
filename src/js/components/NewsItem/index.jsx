@@ -30,15 +30,8 @@ const NewsItem = React.createClass({
   },
 
   render() {
-    var className = 'news-item';
-
-    if (!this.props.newsItem.isExpanded) {
-      className += ' collapsed'
-    }
-    else if (this.props.newsItem.commentsShown) {
-      className += ' with-comments'
-    }
-
+    const className = 'news-item' + (this.props.newsItem.isExpanded ? ' expanded' : '')
+ 
     const props = {
       className,
       onMouseEnter: this.handleMouseEnter,
@@ -80,8 +73,10 @@ const NewsItem = React.createClass({
   },
 
   renderContent() {
+    const className = 'news-content' + (this.props.newsItem.isExpanded ? '' : ' hidden')
+
     return (
-      <div className="news-content">
+      <div className={className}>
         {this.props.newsItem.content}
       </div>
     )
