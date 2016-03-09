@@ -1,8 +1,7 @@
 .news-item {
   max-width: 640px;
-  margin-top: 2rem;
+  margin: 2rem 0;
 }
-.news-item:first-child {margin-top: 0;}
 
 .news-title {
   font-size: 1.5rem;
@@ -25,31 +24,32 @@
 .news-content {
   padding-top: .5rem;
 }
-.news-content.hidden {
-  display: none;
-}
 
 /* animation */
-.news-content-enter {
+.news-content-comments {
+  padding: .1px 0;
+}
+
+.news-content-comments-enter {
   max-height: 0;
   opacity: 0;
   overflow: hidden;
   transition: opacity .4s, max-height .4s;
 }
 
-.news-content-enter-active {
+.news-content-comments-enter-active {
   max-height: 500px;
   opacity: 1;
 }
 
-.news-content-leave {
+.news-content-comments-leave {
   opacity: 1;
   max-height: 500px;
   overflow: hidden;
   transition: max-height .2s, opacity .2s;
 }
 
-.news-content-leave-active {
+.news-content-comments-leave-active {
   max-height: 0;
   opacity: 0;
 }

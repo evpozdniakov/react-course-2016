@@ -44,8 +44,7 @@ const NewsItem = React.createClass({
         {this.props.renderReadBtn(this.handleMarkAsRead)}
         {this.renderDate()}
         {this.renderTitle()}
-        {this.renderContentCssGroup()}
-        {this.renderComments()}
+        {this.renderTransitionGroup()}
       </div>
     )
   },
@@ -73,25 +72,39 @@ const NewsItem = React.createClass({
     )
   },
 
-  renderContentCssGroup() {
+  renderTransitionGroup() {
     const props = {
-      transitionName: 'news-content',
+      transitionName: 'news-content-comments',
       transitionEnterTimeout: 400,
       transitionLeaveTimeout: 200
     }
 
     return (
       <ReactCSSTransitionGroup {...props}>
-        {this.renderContent()}
+        {this.renderContentAndComments()}
       </ReactCSSTransitionGroup>
     )
   },
 
-  renderContent() {
+  renderContentAndComments() {
     if (!this.props.newsItem.isExpanded) {
       return null
     }
 
+    const props = {
+      key: 'news-content-comments',
+      className: 'news-content-comments',
+    }
+
+    return (
+      <div {...props}>
+        {this.renderContent()}
+        {this.renderComments()}
+      </div>
+    )
+  },
+
+  renderContent() {
     const props = {
       key: 'news-content',
       className: 'news-content',
@@ -106,6 +119,7 @@ const NewsItem = React.createClass({
 
   renderComments() {
     const props = {
+      key: 'comments',
       newsId: this.props.newsItem.id,
       comments: this.props.newsItem.getRelation('comments', {isRead: false}).reverse(),
       toggleNewsComments: this.props.toggleNewsComments
