@@ -1,9 +1,10 @@
 'use strict'
 
 import React, {PropTypes} from 'react'
-import NewsComment from 'components/newsComment'
+import Comment from 'components/Comment'
 import addComment from 'HOC/addComment'
 import {postComment} from 'actions/comments'
+import './style.css'
 
 const NewsComments = React.createClass({
   propTypes: {
@@ -27,7 +28,7 @@ const NewsComments = React.createClass({
 
   render() {
     const props = {
-      className: 'news-comments',
+      className: 'comment-list-ctnr',
     }
 
     return (
@@ -59,7 +60,7 @@ const NewsComments = React.createClass({
         comment: comment
       }
 
-      return <NewsComment {...props} />
+      return <Comment {...props} />
     })
 
     const props = {

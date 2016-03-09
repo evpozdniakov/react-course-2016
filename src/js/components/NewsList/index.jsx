@@ -1,9 +1,10 @@
 'use strict'
 
 import React from 'react'
-import NewsItem from 'components/newsItem'
+import NewsItem from 'components/NewsItem'
 import {newsStore} from 'stores'
 import {loadAllNews} from 'actions/news'
+import './style.css'
 
 const NewsList = React.createClass({
   getInitialState() {

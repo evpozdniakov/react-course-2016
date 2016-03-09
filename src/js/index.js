@@ -1,10 +1,10 @@
 'use strict'
 
-import 'components/news.css'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import NewsList from 'components/newsList'
+import NewsList from 'components/NewsList'
 
-const newsList = React.createElement(NewsList);
-
-ReactDOM.render(newsList, document.querySelector('#news-ctnr'));
+ReactDOM.render(
+  React.createElement(NewsList),
+  document.querySelector('#news-ctnr')
+);

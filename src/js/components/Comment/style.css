@@ -1,0 +1,18 @@
+.comment {
+  position: relative;
+  margin-top: .5rem;
+  font-size: .8rem;
+}
+
+.comment:first-child {
+  margin-top: 0;
+}
+
+.comment-author {
+  font-style: italic;
+  font-weight: bold;
+}
+
+.add-comment-btn {
+  margin-left: 1rem;
+}

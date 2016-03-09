@@ -1,9 +1,10 @@
 'use strict'
 
 import React, {PropTypes} from 'react'
-import NewsComments from 'components/newsComments'
+import CommentList from 'components/CommentList'
 import markAsRead from 'HOC/markAsRead'
 import { markNewsAsRead, toggleShowNewsItem } from 'actions/news'
+import './style.css'
 
 const NewsItem = React.createClass({
   propTypes: {
@@ -93,7 +94,7 @@ const NewsItem = React.createClass({
       toggleNewsComments: this.props.toggleNewsComments
     }
 
-    return <NewsComments {...props} />
+    return <CommentList {...props} />
   }
 })
 

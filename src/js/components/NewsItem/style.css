@@ -1,0 +1,24 @@
+.news-item {
+  max-width: 640px;
+  margin-top: 2rem;
+}
+.news-item:first-child {margin-top: 0;}
+.news-title {
+  color: #8C1818;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  cursor: pointer;
+  display: inline-block;
+}
+.collapsed .news-title {
+  color: #666;
+}
+.news-title span {
+  border-color: transparent;
+}
+.collapsed .news-title span {
+  border-bottom: 2px dashed #666;
+}
+.news-content {
+  padding-top: .5rem;
+}

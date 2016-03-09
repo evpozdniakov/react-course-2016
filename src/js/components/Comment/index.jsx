@@ -3,6 +3,7 @@
 import React, {PropTypes} from 'react'
 import markAsRead from 'HOC/markAsRead'
 import {deleteComment, markCommentAsRead} from 'actions/comments'
+import './style.css'
 
 const NewsComment = React.createClass({
   propTypes: {
@@ -25,7 +26,7 @@ const NewsComment = React.createClass({
 
   render() {
     const props = {
-      className: 'news-comment',
+      className: 'comment',
     }
 
     return (

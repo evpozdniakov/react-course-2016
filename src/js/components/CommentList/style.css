@@ -1,0 +1,6 @@
+.comment-list .comments-toggle {
+  display: inline-block;
+  margin: .5rem 0;
+  border-bottom: 1px dashed #666;
+  cursor: pointer;
+}
