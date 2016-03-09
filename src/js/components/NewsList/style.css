@@ -1,3 +1,15 @@
 .news-list-ctnr {
   padding: 2rem;
 }
+
+/* animation */
+.news-item-leave {
+  max-height: 500px;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity .2s, max-height .2s;
+}
+.news-item-leave-active {
+  max-height: 0;
+  opacity: 0;
+}

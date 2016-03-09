@@ -44,7 +44,7 @@ const NewsItem = React.createClass({
         {this.props.renderReadBtn(this.handleMarkAsRead)}
         {this.renderDate()}
         {this.renderTitle()}
-        {this.renderContent()}
+        {this.renderContentCssGroup()}
         {this.renderComments()}
       </div>
     )
@@ -73,23 +73,34 @@ const NewsItem = React.createClass({
     )
   },
 
-  renderContent() {
-    let content
-    if (this.props.newsItem.isExpanded) {
-      content = (
-        <div key="news-content" className="news-content">
-          {this.props.newsItem.content}
-        </div>
-      )
-    }
-    else {
-      content = null
+  renderContentCssGroup() {
+    const props = {
+      transitionName: 'news-content',
+      transitionEnterTimeout: 400,
+      transitionLeaveTimeout: 200
     }
 
     return (
-      <ReactCSSTransitionGroup transitionName="news-content" transitionEnterTimeout={400} transitionLeaveTimeout={200}>
-        {content}
+      <ReactCSSTransitionGroup {...props}>
+        {this.renderContent()}
       </ReactCSSTransitionGroup>
+    )
+  },
+
+  renderContent() {
+    if (!this.props.newsItem.isExpanded) {
+      return null
+    }
+
+    const props = {
+      key: 'news-content',
+      className: 'news-content',
+    }
+
+    return (
+      <div {...props}>
+        {this.props.newsItem.content}
+      </div>
     )
   },
 
