@@ -11,3 +11,25 @@
 	width: 50%;
 	height: 4em;
 }
+
+/* animation */
+.add-comment-ui-enter {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .4s, opacity .4s;
+}
+.add-comment-ui-enter-active {
+  opacity: 1;
+  max-height: 150px
+}
+.add-comment-ui-leave {
+  opacity: 1;
+  max-height: 150px;
+  overflow: hidden;
+  transition: max-height .4s, opacity .4s;
+}
+.add-comment-ui-leave-active {
+  opacity: 0;
+  max-height: 0;
+}

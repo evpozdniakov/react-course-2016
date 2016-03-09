@@ -2,6 +2,7 @@
 
 import './style.css'
 import React, {Component} from 'react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 export default OriginalComponent => {
   return class extends Component {
@@ -54,9 +55,7 @@ export default OriginalComponent => {
       return (
         <div {...props}>
           {this.renderToggleBtn()}
-          {this.renderInputAuthor()}
-          {this.renderInputText()}
-          {this.renderPostBtn()}
+          {this.renderTransitionGroup()}
         </div>
       )
     }
@@ -70,12 +69,29 @@ export default OriginalComponent => {
       return <button {...props}>+ comment</button>
     }
 
+    renderTransitionGroup() {
+      const props = {
+        transitionName: 'add-comment-ui',
+        transitionEnterTimeout: 400,
+        transitionLeaveTimeout: 200,
+      }
+
+      return (
+        <ReactCSSTransitionGroup {...props}>
+          {this.renderInputAuthor()}
+          {this.renderInputText()}
+          {this.renderPostBtn()}
+        </ReactCSSTransitionGroup>
+      )
+    }
+
     renderInputAuthor() {
       if (!this.state.isShown) {
         return null
       }
 
       const props = {
+        key: 'input-author',
         className: 'input author',
         placeholder: 'your name',
         onChange: this.handleChangeAuthor.bind(this),
@@ -91,6 +107,7 @@ export default OriginalComponent => {
       }
 
       const props = {
+        key: 'input-text',
         className: 'input text',
         placeholder: 'your comment',
         onChange: this.handleChangeText.bind(this),
@@ -106,6 +123,7 @@ export default OriginalComponent => {
       }
 
       const props = {
+        key: 'post-btn',
         className: 'post-btn',
         onClick: this.handlePostComment.bind(this)
       }
