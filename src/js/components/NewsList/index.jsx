@@ -71,7 +71,7 @@ const NewsList = React.createClass({
     newsItem.commentsShown = newsItem.isExpanded && this.state.commentsShown 
 
     const props = {
-      key: 'news-item',
+      key: newsItem.id,
       toggleNewsComments: this.toggleNewsComments,
       newsItem: newsItem,
     }

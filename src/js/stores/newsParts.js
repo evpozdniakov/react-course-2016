@@ -10,6 +10,6 @@ export default class NewsPartStore extends SimpleStore {
   }
 
   getAllUnread() {
-    return this._items.filter(item => item.isRead != true)
+    return this._items.filter(item => item.isRead != true).slice()
   }
 }

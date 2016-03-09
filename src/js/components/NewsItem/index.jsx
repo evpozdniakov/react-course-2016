@@ -3,7 +3,7 @@
 import React, {PropTypes} from 'react'
 import CommentList from 'components/CommentList'
 import markAsRead from 'HOC/markAsRead'
-import { markNewsAsRead, toggleShowNewsItem } from 'actions/news'
+import { markNewsAsRead, toggleShowNewsItem, loadNewsItem } from 'actions/news'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import './style.css'
 
@@ -13,13 +13,27 @@ const NewsItem = React.createClass({
       id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
       published: PropTypes.string.isRequired,
-      content: PropTypes.string.isRequired,
+      content: PropTypes.string,
       comments: PropTypes.array.isRequired,
       isExpanded: PropTypes.bool.isRequired,
       commentsShown: PropTypes.bool.isRequired
     }).isRequired,
     toggleNewsComments: PropTypes.func.isRequired,
     renderReadBtn: PropTypes.func.isRequired,
+  },
+
+  componentWillReceiveProps(newProps) {
+    console.log('--- componentWillReceiveProps');
+    console.log('--- this.props.newsItem: ', this.props.newsItem.isExpanded);
+    console.log('--- newProps', newProps.newsItem.isExpanded);
+    console.log('--- same? ', this.props === newProps);
+    // const {id, content, isExpanded} = this.props.newsItem
+
+    // console.log('---', content, isExpanded, nextProps.newsItem.isExpanded);
+
+    // if (!content && !isExpanded && nextProps.newsItem.isExpanded) {
+    //   loadNewsItem(id)
+    // }
   },
 
   handleMarkAsRead() {
@@ -110,11 +124,13 @@ const NewsItem = React.createClass({
       className: 'news-content',
     }
 
-    return (
-      <div {...props}>
-        {this.props.newsItem.content}
-      </div>
-    )
+    if (this.props.newsItem.content) {
+      return (
+        <div {...props}>
+          {this.props.newsItem.content}
+        </div>
+      )
+    }
   },
 
   renderComments() {

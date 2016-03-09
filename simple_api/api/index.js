@@ -6,7 +6,7 @@ var assign = require('object-assign');
 router.get('/news', function (req, res, next) {
     var articles = withComments(news).map(function (article) {
             return assign({}, article, {
-                text: undefined
+                content: undefined
             })
         }),
         limit = Number(req.query.limit) || articles.length,

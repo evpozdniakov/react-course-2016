@@ -19,3 +19,7 @@ export function toggleShowNewsItem(id) {
     data: {id}
   })
 }
+
+export function loadNewsItem(id) {
+  console.log('--- will load news item', id);
+}
