@@ -4,6 +4,7 @@ import React, {PropTypes} from 'react'
 import CommentList from 'components/CommentList'
 import markAsRead from 'HOC/markAsRead'
 import { markNewsAsRead, toggleShowNewsItem } from 'actions/news'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import './style.css'
 
 const NewsItem = React.createClass({
@@ -73,12 +74,22 @@ const NewsItem = React.createClass({
   },
 
   renderContent() {
-    const className = 'news-content' + (this.props.newsItem.isExpanded ? '' : ' hidden')
+    let content
+    if (this.props.newsItem.isExpanded) {
+      content = (
+        <div key="news-content" className="news-content">
+          {this.props.newsItem.content}
+        </div>
+      )
+    }
+    else {
+      content = null
+    }
 
     return (
-      <div className={className}>
-        {this.props.newsItem.content}
-      </div>
+      <ReactCSSTransitionGroup transitionName="news-content" transitionEnterTimeout={400} transitionLeaveTimeout={200}>
+        {content}
+      </ReactCSSTransitionGroup>
     )
   },
 
