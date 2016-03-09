@@ -13,6 +13,9 @@
 }
 
 /* animation */
+.add-comment-ui {
+  padding: 1px 0;
+}
 .add-comment-ui-enter {
   opacity: 0;
   max-height: 0;

@@ -78,18 +78,31 @@ export default OriginalComponent => {
 
       return (
         <ReactCSSTransitionGroup {...props}>
-          {this.renderInputAuthor()}
-          {this.renderInputText()}
-          {this.renderPostBtn()}
+          {this.renderAuthorTextAndPostBtn()}
         </ReactCSSTransitionGroup>
       )
     }
 
-    renderInputAuthor() {
+    renderAuthorTextAndPostBtn() {
       if (!this.state.isShown) {
         return null
       }
 
+      const props = {
+        key: 'add-comment-ui',
+        className: 'add-comment-ui',
+      }
+
+      return (
+        <div {...props}>
+          {this.renderInputAuthor()}
+          {this.renderInputText()}
+          {this.renderPostBtn()}
+        </div>
+      )
+    }
+
+    renderInputAuthor() {
       const props = {
         key: 'input-author',
         className: 'input author',
@@ -102,10 +115,6 @@ export default OriginalComponent => {
     }
 
     renderInputText() {
-      if (!this.state.isShown) {
-        return null
-      }
-
       const props = {
         key: 'input-text',
         className: 'input text',
@@ -118,10 +127,6 @@ export default OriginalComponent => {
     }
 
     renderPostBtn() {
-      if (!this.state.isShown) {
-        return null
-      }
-
       const props = {
         key: 'post-btn',
         className: 'post-btn',
