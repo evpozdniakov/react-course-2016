@@ -1,4 +1,4 @@
-import NewsPartStore from 'stores/newsPartStore'
+import NewsPartStore from 'stores/newsParts'
 import AppDispatcher from 'dispatcher'
 import {MARK_AS_READ, POST, DELETE, _COMMENT} from 'constants'
 

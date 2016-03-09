@@ -1,4 +1,4 @@
-import NewsPartStore from 'stores/newsPartStore'
+import NewsPartStore from 'stores/newsParts'
 import AppDispatcher from 'dispatcher'
 import { MARK_AS_READ, POST, DELETE, LOAD, TOGGLE_SHOW, _NEWS_ITEM, _ALL_NEWS, _COMMENT, _START, _DONE, _FAIL } from 'constants'
 

@@ -1,5 +1,5 @@
-import NewsStore from 'stores/newsStore'
-import CommentStore from 'stores/commentStore'
+import NewsStore from 'stores/news'
+import CommentStore from 'stores/comments'
 
 const stores = {}
 
