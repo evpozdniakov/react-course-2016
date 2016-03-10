@@ -1,6 +1,7 @@
 import AppDispatcher from 'dispatcher'
-import {MARK_AS_READ, POST, DELETE, _COMMENT} from 'constants'
+import {MARK_AS_READ, LOAD, POST, DELETE, _COMMENT, _COMMENTS} from 'constants'
 import { getRandomId } from 'utils'
+import loadFromAPI from 'actions/api'
 
 export const markCommentAsRead = (id) => {
   AppDispatcher.dispatch({
@@ -33,4 +34,8 @@ export const deleteComment = (id) => {
     type: DELETE + _COMMENT,
     data: {id},
   })
+}
+
+export function loadNewsComments(newsId) {
+  loadFromAPI(`/api/comment/${newsId}`, LOAD + _COMMENTS, {newsId})
 }

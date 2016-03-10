@@ -20,7 +20,6 @@ const NewsItem = React.createClass({
       isLoading: PropTypes.bool,
       isLoaded: PropTypes.bool,
     }).isRequired,
-    toggleNewsComments: PropTypes.func.isRequired,
     renderReadBtn: PropTypes.func.isRequired,
   },
 
@@ -137,11 +136,15 @@ const NewsItem = React.createClass({
   },
 
   renderComments() {
+    const { id, isLoadingComments, isLoadedComments, comments, getRelation } = this.props.newsItem
+
     const props = {
       key: 'comments',
-      newsId: this.props.newsItem.id,
-      comments: this.props.newsItem.getRelation('comments', {isRead: false}).reverse(),
-      toggleNewsComments: this.props.toggleNewsComments
+      newsId: id,
+      isLoading: isLoadingComments,
+      isLoaded: isLoadedComments,
+      commentCount: comments.length,
+      comments: getRelation('comments', {isRead: false}).reverse(),
     }
 
     return <CommentList {...props} />

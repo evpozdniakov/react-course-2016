@@ -4,7 +4,7 @@ export default class Model {
     this._stores = stores
   }
 
-  getRelation(type, filter) {
+  getRelation = (type, filter) => {
     if (!this[type]) {
       return []
     }

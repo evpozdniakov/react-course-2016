@@ -2,8 +2,8 @@
 
 import React from 'react'
 import NewsItem from 'components/NewsItem'
-import {newsStore} from 'stores'
-import {loadAllNews} from 'actions/news'
+import { newsStore, commentStore } from 'stores'
+import { loadAllNews } from 'actions/news'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import './style.css'
 
@@ -17,21 +17,19 @@ const NewsList = React.createClass({
 
   componentDidMount() {
     newsStore.addEventListener(this.change)
+    commentStore.addEventListener(this.change)
     loadAllNews()
   },
 
   componentWillUnmount() {
     newsStore.remveEventListener(this.change)
+    commentStore.remveEventListener(this.change)
   },
 
   change() {
     this.setState({
       newsData: newsStore.getAll()
     })
-  },
-
-  toggleNewsComments() {
-    this.setState({commentsShown: !this.state.commentsShown})
   },
 
   render() {
@@ -72,7 +70,6 @@ const NewsList = React.createClass({
 
     const props = {
       key: newsItem.id,
-      toggleNewsComments: this.toggleNewsComments,
       newsItem: newsItem,
     }
 

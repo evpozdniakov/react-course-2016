@@ -3,17 +3,38 @@
 import React, {PropTypes} from 'react'
 import Comment from 'components/Comment'
 import addComment from 'HOC/addComment'
-import {postComment} from 'actions/comments'
+import {postComment, loadNewsComments} from 'actions/comments'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import './style.css'
 
 const NewsComments = React.createClass({
   propTypes: {
     newsId: PropTypes.number.isRequired,
-    toggleNewsComments: PropTypes.func.isRequired,
+    commentCount: PropTypes.number.isRequired,
+    isLoading: PropTypes.bool,
+    isLoaded: PropTypes.bool,
     comments: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number.isRequired
     })).isRequired,
     renderAddCommentUI: PropTypes.func.isRequired,
+  },
+
+  getInitialState() {
+    return {
+      isExpanded: false
+    }
+  },
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const { isExpanded } = nextState
+    const { commentCount, newsId, isLoaded, isLoading } = nextProps
+
+    if (isExpanded && commentCount > 0 && !isLoaded && !isLoading) {
+      loadNewsComments(newsId)
+      return false
+    }
+
+    return true
   },
 
   handlePostComment({author, text}) {
@@ -26,6 +47,11 @@ const NewsComments = React.createClass({
     postComment(data)
   },
 
+  handleToggleComments() {
+    const { isExpanded } = this.state;
+    this.setState({isExpanded: !isExpanded})
+  },
+
   render() {
     const props = {
       className: 'comment-list-ctnr',
@@ -35,26 +61,53 @@ const NewsComments = React.createClass({
       <div {...props}>
         {this.props.renderAddCommentUI(this.handlePostComment)}
         {this.renderToggleList()}
-        {this.renderList()}
+        {this.renderListTransition()}
       </div>
     )
   },
 
   renderToggleList() {
+    const { commentCount } = this.props
     const props = {
-      className: 'comments-toggle',
-      onClick: this.props.toggleNewsComments
+      className: 'comments-toggle' + (commentCount > 0 ? ' clickable' : ''),
+      onClick: this.handleToggleComments,
     }
 
     return (
       <div {...props}>
-        Комментариев: {this.props.comments.length}
+        Комментариев: {this.props.commentCount}
       </div>
     )
   },
 
+  renderListTransition() {
+    const props = {
+      transitionName: 'comment-list',
+      transitionEnterTimeout: 400,
+      transitionLeaveTimeout: 200,
+    }
+
+    return (
+      <ReactCSSTransitionGroup {...props}>
+        {this.renderList()}
+      </ReactCSSTransitionGroup>
+    )
+  },
+
   renderList() {
-    const commentElms = this.props.comments.map(comment => {
+    const { isExpanded } = this.state
+
+    if (!this.state.isExpanded) {
+      return null
+    }
+
+    const { isLoading, comments } = this.props
+
+    if (isLoading) {
+      return <div className="loading">loading...</div>
+    }
+
+    const commentElms = comments.map(comment => {
       const props = {
         key: comment.id,
         comment: comment

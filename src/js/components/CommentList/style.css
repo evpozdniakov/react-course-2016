@@ -2,9 +2,41 @@
   margin-top: 1rem;
 }
 
-.comment-list .comments-toggle {
+.comments-toggle {
   display: inline-block;
   margin: .5rem 0;
+}
+
+.comments-toggle.clickable {
   border-bottom: 1px dashed #666;
   cursor: pointer;
+}
+
+/* animation */
+.comment-list {
+  padding: 1px 0;
+}
+
+.comment-list-enter {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: opacity .4s, max-height .4s;
+}
+
+.comment-list-enter-active {
+  max-height: 500px;
+  opacity: 1;
+}
+
+.comment-list-leave {
+  opacity: 1;
+  max-height: 500px;
+  overflow: hidden;
+  transition: max-height .2s, opacity .2s;
+}
+
+.comment-list-leave-active {
+  max-height: 0;
+  opacity: 0;
 }
