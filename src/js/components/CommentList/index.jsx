@@ -67,15 +67,18 @@ const NewsComments = React.createClass({
   },
 
   renderToggleList() {
-    const { commentCount } = this.props
+    const { commentCount, comments, isLoaded } = this.props
+
+    const displayCommentCount = isLoaded ? comments.length : commentCount
+
     const props = {
-      className: 'comments-toggle' + (commentCount > 0 ? ' clickable' : ''),
+      className: 'comments-toggle' + (displayCommentCount > 0 ? ' clickable' : ''),
       onClick: this.handleToggleComments,
     }
 
     return (
       <div {...props}>
-        Комментариев: {this.props.commentCount}
+        Комментариев: {displayCommentCount}
       </div>
     )
   },
