@@ -16,24 +16,23 @@ const NewsItem = React.createClass({
       content: PropTypes.string,
       comments: PropTypes.array.isRequired,
       isExpanded: PropTypes.bool.isRequired,
-      commentsShown: PropTypes.bool.isRequired
+      commentsShown: PropTypes.bool.isRequired,
+      isLoading: PropTypes.bool,
+      isLoaded: PropTypes.bool,
     }).isRequired,
     toggleNewsComments: PropTypes.func.isRequired,
     renderReadBtn: PropTypes.func.isRequired,
   },
 
-  componentWillReceiveProps(newProps) {
-    console.log('--- componentWillReceiveProps');
-    console.log('--- this.props.newsItem: ', this.props.newsItem.isExpanded);
-    console.log('--- newProps', newProps.newsItem.isExpanded);
-    console.log('--- same? ', this.props === newProps);
-    // const {id, content, isExpanded} = this.props.newsItem
+  shouldComponentUpdate(nextProps) {
+    const {id, content, isLoaded, isLoading, isExpanded} = nextProps.newsItem
 
-    // console.log('---', content, isExpanded, nextProps.newsItem.isExpanded);
+    if (isExpanded && !content && !isLoading && !isLoaded) {
+      loadNewsItem(id)
+      return false
+    }
 
-    // if (!content && !isExpanded && nextProps.newsItem.isExpanded) {
-    //   loadNewsItem(id)
-    // }
+    return true
   },
 
   handleMarkAsRead() {
@@ -58,7 +57,7 @@ const NewsItem = React.createClass({
         {this.props.renderReadBtn(this.handleMarkAsRead)}
         {this.renderDate()}
         {this.renderTitle()}
-        {this.renderTransitionGroup()}
+        {this.renderContentTransition()}
       </div>
     )
   },
@@ -86,7 +85,7 @@ const NewsItem = React.createClass({
     )
   },
 
-  renderTransitionGroup() {
+  renderContentTransition() {
     const props = {
       transitionName: 'news-content-comments',
       transitionEnterTimeout: 400,
@@ -119,18 +118,22 @@ const NewsItem = React.createClass({
   },
 
   renderContent() {
+    const { content, isLoading } = this.props.newsItem
+
+    if (isLoading) {
+      return <div className="loading">loading...</div>
+    }
+
     const props = {
       key: 'news-content',
       className: 'news-content',
     }
 
-    if (this.props.newsItem.content) {
-      return (
-        <div {...props}>
-          {this.props.newsItem.content}
-        </div>
-      )
-    }
+    return (
+      <div {...props}>
+        {content}
+      </div>
+    )
   },
 
   renderComments() {

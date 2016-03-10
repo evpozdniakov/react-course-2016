@@ -32,22 +32,15 @@ export default class NewsStore extends NewsPartStore {
           break
 
         case LOAD + _ALL_NEWS + _START:
-          this.loading = true
-          this.loaded = false
-          this.change()
-          break
-
         case LOAD + _ALL_NEWS + _DONE:
-          data.response.map(this.addItem)
-          this.loading = false
-          this.loaded = true
-          this.change()
+        case LOAD + _ALL_NEWS + _FAIL:
+          this.loadAllNews(type, data)
           break
 
-        case LOAD + _ALL_NEWS + _FAIL:
-          this.loading = false
-          this.loaded = false
-          this.change()
+        case LOAD + _NEWS_ITEM + _START:
+        case LOAD + _NEWS_ITEM + _DONE:
+        case LOAD + _NEWS_ITEM + _FAIL:
+          this.loadNewsItem(type, data)
           break
 
         case TOGGLE_SHOW + _NEWS_ITEM:
@@ -84,6 +77,55 @@ export default class NewsStore extends NewsPartStore {
   collapsePreviouslyExpandedNews() {
     if (this.expandedNewsId) {
       this.getItem(this.expandedNewsId).isExpanded = false
+    }
+  }
+
+  loadAllNews(type, data) {
+    switch(type) {
+      case LOAD + _ALL_NEWS + _START:
+        this.isLoading = true
+        this.isLoaded = false
+        this.change()
+        break
+
+      case LOAD + _ALL_NEWS + _DONE:
+        data.response.map(this.addItem)
+        this.isLoading = false
+        this.isLoaded = true
+        this.change()
+        break
+
+      case LOAD + _ALL_NEWS + _FAIL:
+        this.isLoading = false
+        this.isLoaded = false
+        this.change()
+        break
+    }
+  }
+
+  loadNewsItem(type, data) {
+    const { id } = data.origData
+    const newsItem = this.getItem(id)
+
+    switch(type) {
+      case LOAD + _NEWS_ITEM + _START:
+        newsItem.isLoading = true
+        newsItem.isLoaded = false
+        this.change()
+        break
+
+      case LOAD + _NEWS_ITEM + _DONE:
+        newsItem.content = data.response.content
+        newsItem.isLoading = false
+        newsItem.isLoaded = true
+        this.change()
+        break
+
+      case LOAD + _NEWS_ITEM + _FAIL:
+        newsItem.isLoading = false
+        newsItem.isLoaded = false
+        this.change()
+        break
     }
   }
 }

@@ -21,5 +21,5 @@ export function toggleShowNewsItem(id) {
 }
 
 export function loadNewsItem(id) {
-  console.log('--- will load news item', id);
+  loadFromAPI(`/api/news/${id}`, LOAD + _NEWS_ITEM, { id })
 }

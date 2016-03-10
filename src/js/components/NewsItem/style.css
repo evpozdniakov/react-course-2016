@@ -25,6 +25,10 @@
   padding-top: .5rem;
 }
 
+.loading {
+  margin: 1rem 0;
+}
+
 /* animation */
 .news-content-comments {
   padding: 1px 0;
