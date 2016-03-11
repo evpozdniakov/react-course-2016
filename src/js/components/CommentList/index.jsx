@@ -25,6 +25,7 @@ const NewsComments = React.createClass({
     }
   },
 
+  //ОООчень плохой выбор, shouldComponentUpdate не должно ничего менять, только решать обновляться ли компоненту. И тут незачем
   shouldComponentUpdate(nextProps, nextState) {
     const { isExpanded } = nextState
     const { commentCount, newsId, isLoaded, isLoading } = nextProps
