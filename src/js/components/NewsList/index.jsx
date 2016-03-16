@@ -4,6 +4,7 @@ import React from 'react'
 import NewsItem from 'components/NewsItem'
 import { newsStore, commentStore } from 'stores'
 import { loadAllNews } from 'actions/news'
+import { Link } from 'react-router'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import './style.css'
 
@@ -34,47 +35,30 @@ const NewsList = React.createClass({
 
   render() {
     const props = {
-      className: 'news-list-ctnr'
+      className: 'news-titles'
     }
 
     return (
       <div {...props}>
-        {this.renderNewsItems()}
+        {this.renderNewsTitles()}
       </div>
     )
   },
 
-  renderNewsItems() {
-    return this.state.newsData.map(newsItem => {
-      const props = {
-        key: newsItem.id,
-        transitionName: 'news-item',
-        transitionEnterTimeout: 400,
-        transitionLeaveTimeout: 200,
-      }
+  renderNewsTitles() {
+    const links = this.state.newsData.map(newsItem => {
+      const linkTo = `/news/${newsItem.id}`
 
       return (
-        <ReactCSSTransitionGroup {...props}>
-          {this.renderNewsItem(newsItem)}
-        </ReactCSSTransitionGroup>
+        <li key={newsItem.id}>
+          <time>{newsItem.published}</time>
+          <Link to={linkTo}>{newsItem.title}</Link>
+        </li>
       )
     })
+
+    return <ul>{links}</ul>
   },
-
-  renderNewsItem(newsItem) {
-    if (newsItem.isRead) {
-      return null      
-    }
-
-    newsItem.commentsShown = newsItem.isExpanded && this.state.commentsShown 
-
-    const props = {
-      key: newsItem.id,
-      newsItem: newsItem,
-    }
-
-    return <NewsItem {...props} />
-  }
 })
 
 export default NewsList

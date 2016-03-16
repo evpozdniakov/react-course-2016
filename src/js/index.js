@@ -1,10 +1,7 @@
 'use strict'
 
 import React from 'react'
-import ReactDOM from 'react-dom'
-import NewsList from 'components/NewsList'
+import ReactDOM, { render } from 'react-dom'
+import routes from './routes'
 
-ReactDOM.render(
-  React.createElement(NewsList),
-  document.querySelector('#news-ctnr')
-);
+render(routes, document.querySelector('#news-ctnr'))
