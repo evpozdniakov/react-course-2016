@@ -1,12 +1,28 @@
+.news-titles {
+  margin: 1rem;
+  display: flex;
+}
+
 .news-titles time {
   display: block;
   font-size: small;
 }
 
 .news-titles ul {
+  margin: 0;
+  padding: 0;
   list-style-type: none;
+}
+
+.news-titles > * {
+  flex: 1;
+  padding: 1rem !important;
 }
 
 .news-titles li {
   margin: 1rem 0;
+}
+
+.news-titles li:first-child {
+  margin-top: 0;
 }

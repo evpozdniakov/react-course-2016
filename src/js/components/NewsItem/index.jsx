@@ -2,7 +2,6 @@
 
 import React, {PropTypes} from 'react'
 import CommentList from 'components/CommentList'
-import markAsRead from 'HOC/markAsRead'
 import { markNewsAsRead, toggleShowNewsItem, loadNewsItem } from 'actions/news'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import './style.css'
@@ -20,7 +19,6 @@ const NewsItem = React.createClass({
       isLoading: PropTypes.bool,
       isLoaded: PropTypes.bool,
     }).isRequired,
-    renderReadBtn: PropTypes.func.isRequired,
   },
 
   shouldComponentUpdate(nextProps) {
@@ -53,7 +51,6 @@ const NewsItem = React.createClass({
 
     return (
       <div {...props}>
-        {this.props.renderReadBtn(this.handleMarkAsRead)}
         {this.renderDate()}
         {this.renderTitle()}
         {this.renderContentTransition()}
@@ -151,4 +148,4 @@ const NewsItem = React.createClass({
   }
 })
 
-export default markAsRead(NewsItem)
+export default NewsItem

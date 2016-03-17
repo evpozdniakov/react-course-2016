@@ -41,6 +41,7 @@ const NewsList = React.createClass({
     return (
       <div {...props}>
         {this.renderNewsTitles()}
+        {this.renderCurrentNewsItem()}
       </div>
     )
   },
@@ -49,16 +50,27 @@ const NewsList = React.createClass({
     const links = this.state.newsData.map(newsItem => {
       const linkTo = `/news/${newsItem.id}`
 
+      const { id } = this.props.params
+
+      const shorterTitle = newsItem.title.substr(0, 80) + '...';
+
       return (
         <li key={newsItem.id}>
-          <time>{newsItem.published}</time>
-          <Link to={linkTo}>{newsItem.title}</Link>
+          <Link to={linkTo}>{shorterTitle}</Link>
         </li>
       )
     })
 
     return <ul>{links}</ul>
   },
+
+  renderCurrentNewsItem() {
+    if (!newsStore.hasData) {
+      return null
+    }
+
+    return this.props.children
+  }
 })
 
 export default NewsList

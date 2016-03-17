@@ -34,32 +34,32 @@ export default class NewsStore extends NewsPartStore {
         case LOAD + _ALL_NEWS + _START:
         case LOAD + _ALL_NEWS + _DONE:
         case LOAD + _ALL_NEWS + _FAIL:
-          this.loadAllNews(type, data)
+          this._loadAllNews(type, data)
           break
 
         case LOAD + _NEWS_ITEM + _START:
         case LOAD + _NEWS_ITEM + _DONE:
         case LOAD + _NEWS_ITEM + _FAIL:
-          this.loadNewsItem(type, data)
+          this._loadNewsItem(type, data)
           break
 
         case TOGGLE_SHOW + _NEWS_ITEM:
-          this.toggleShowNewsItem(data)
+          this._toggleShowNewsItem(data)
           this.change()
           break
       }
     })
   }
 
-  addItem(item) {
-    super.addItem({
+  _addItem(item) {
+    super._addItem({
       ...item,
       isRead: false,
       isExpanded: false,
     })
   }
 
-  toggleShowNewsItem(data) {
+  _toggleShowNewsItem(data) {
     const { id } = data
     const newsItem = this.getItem(id)
 
@@ -68,19 +68,19 @@ export default class NewsStore extends NewsPartStore {
       this.expandedNewsId = null
     }
     else {
-      this.collapsePreviouslyExpandedNews()
+      this._collapsePreviouslyExpandedNews()
       newsItem.isExpanded = true
       this.expandedNewsId = id
     }
   }
 
-  collapsePreviouslyExpandedNews() {
+  _collapsePreviouslyExpandedNews() {
     if (this.expandedNewsId) {
       this.getItem(this.expandedNewsId).isExpanded = false
     }
   }
 
-  loadAllNews(type, data) {
+  _loadAllNews(type, data) {
     switch(type) {
       case LOAD + _ALL_NEWS + _START:
         this.isLoading = true
@@ -89,7 +89,7 @@ export default class NewsStore extends NewsPartStore {
         break
 
       case LOAD + _ALL_NEWS + _DONE:
-        data.response.map(this.addItem)
+        data.response.map(this._addItem)
         this.isLoading = false
         this.isLoaded = true
         this.change()
@@ -103,7 +103,7 @@ export default class NewsStore extends NewsPartStore {
     }
   }
 
-  loadNewsItem(type, data) {
+  _loadNewsItem(type, data) {
     const { id } = data.origData
     const newsItem = this.getItem(id)
 

@@ -36,7 +36,7 @@ export default class CommentStore extends NewsPartStore {
   postComment(data) {
     const { commentId, author, text, isRead } = data
 
-    this.addItem({
+    this._addItem({
       id: commentId,
       author,
       text,
@@ -57,7 +57,7 @@ export default class CommentStore extends NewsPartStore {
       case LOAD + _COMMENTS + _DONE:
         newsItem.isLoadingComments = false
         newsItem.isLoadedComments = true
-        data.response.forEach(this.addItem)
+        data.response.forEach(this._addItem)
         break
 
       case LOAD + _COMMENTS + _FAIL:
