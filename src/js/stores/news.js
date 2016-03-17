@@ -1,5 +1,6 @@
 import NewsPartStore from 'stores/newsParts'
 import AppDispatcher from 'dispatcher'
+import { loadNewsItem } from 'actions/news'
 import { MARK_AS_READ, POST, DELETE, LOAD, TOGGLE_SHOW, _NEWS_ITEM, _ALL_NEWS, _COMMENT, _START, _DONE, _FAIL } from 'constants'
 
 export default class NewsStore extends NewsPartStore {
@@ -49,6 +50,20 @@ export default class NewsStore extends NewsPartStore {
           break
       }
     })
+  }
+
+  getOrLoadNewsItem(id) {
+    const newsItem = this.getItem(id)
+
+    if (newsItem && newsItem.isLoaded) {
+      return newsItem
+    }
+
+    if (newsItem && newsItem.isLoading) {
+      return null
+    }
+
+    loadNewsItem(id)
   }
 
   _addItem(item) {

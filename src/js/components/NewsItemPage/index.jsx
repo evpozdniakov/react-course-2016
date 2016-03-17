@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import NewsItem from 'components/NewsItem'
 import { newsStore } from 'stores'
-import { loadNewsItem } from 'actions/news'
 
 export default class NewsItemPage extends Component {
   static propTypes = {}
@@ -39,7 +38,9 @@ export default class NewsItemPage extends Component {
     const { id } = props.params
 
     setTimeout(() => {
-      loadNewsItem(id)
+      this.setState({
+        newsItem: newsStore.getOrLoadNewsItem(id)
+      })
     }, 0)
   }
 
