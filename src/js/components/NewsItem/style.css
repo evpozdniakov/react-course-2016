@@ -8,17 +8,7 @@
   line-height: 1.5rem;
   cursor: pointer;
   display: inline-block;
-  color: #666;
-}
-.expanded .news-title {
   color: #8C1818;
-}
-
-.news-title span {
-  border-bottom: 2px dashed #666;
-}
-.expanded .news-title span {
-  border-color: transparent;
 }
 
 .news-content {

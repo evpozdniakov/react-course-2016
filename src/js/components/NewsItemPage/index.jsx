@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import NewsItem from 'components/NewsItem'
 import { newsStore } from 'stores'
+import { Link } from 'react-router'
 
 export default class NewsItemPage extends Component {
   static propTypes = {}
@@ -34,6 +35,18 @@ export default class NewsItemPage extends Component {
     this.setState({newsItem})
   }
 
+  getNewsItemIfLoaded() {
+    const { id } = this.props.params
+
+    var { newsItem } = this.state
+
+    if (!newsItem) {
+      newsItem = newsStore.getItem(id)
+    }
+
+    return newsItem
+  }
+
   requestNewsItem(props) {
     const { id } = props.params
 
@@ -45,26 +58,36 @@ export default class NewsItemPage extends Component {
   }
 
   render() {
-    var { newsItem } = this.state
-
-    if (!newsItem) {
-      const { id } = this.props.params
-      newsItem = newsStore.getItem(id)      
-    }
+    const newsItem = this.getNewsItemIfLoaded()
 
     if (!newsItem) {
       return null
     }
 
-    newsItem.isExpanded = true
-    newsItem.commentsShown = false
+    const linkToComments = (newsItem.isLoaded) ? this.renderLinkToComments() : null
 
     const props = {
-      newsItem
+      newsItem,
     }
 
     return (
-      <NewsItem {...props} />
+      <div>
+        <NewsItem {...props} />
+        {linkToComments}
+        {this.props.children}
+      </div>
+    )
+  }
+
+  renderLinkToComments() {
+    const { id, page=1 } = this.props.params
+
+    const href = `/news/${id}/comments/${page}`
+
+    return (
+      <Link to={href}>
+        Комментарии
+      </Link>
     )
   }
 }
