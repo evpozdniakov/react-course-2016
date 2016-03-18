@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import CommentList from 'components/CommentList'
 import { newsStore, commentStore } from 'stores'
-import { Link } from 'react-router'
+import { Link, browserHistory } from 'react-router'
 import './style.css'
 
 export default class CommentListPage extends Component {
@@ -66,6 +66,13 @@ export default class CommentListPage extends Component {
 
     var pages = []
     const maxPage = Math.floor(newsItem.comments.length / 10)
+
+    if (page > maxPage) {
+      browserHistory.push(`/news/${id}/comments/${maxPage}`)
+    }
+    else if (isNaN(page)) {
+      browserHistory.push(`/news/${id}/comments/1`)
+    }
 
     for (var i = 1; i <= maxPage; i++) {
       pages.push(i)
