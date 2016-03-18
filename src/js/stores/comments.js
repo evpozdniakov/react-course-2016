@@ -45,6 +45,8 @@ export default class CommentStore extends NewsPartStore {
     if (!newsItem.isLoadingComments) {
       loadNewsComments(newsId)
     }
+
+    return []
   }
 
   postComment(data) {

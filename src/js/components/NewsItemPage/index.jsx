@@ -80,9 +80,13 @@ export default class NewsItemPage extends Component {
   }
 
   renderLinkToComments() {
-    const { id, page=1 } = this.props.params
+    const { id, page } = this.props.params
 
-    const href = `/news/${id}/comments/${page}`
+    if (page) {
+      return null
+    }
+
+    const href = `/news/${id}/comments/1`
 
     return (
       <Link to={href}>
