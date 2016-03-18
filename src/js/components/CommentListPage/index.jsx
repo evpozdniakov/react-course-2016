@@ -48,13 +48,13 @@ export default class CommentListPage extends Component {
     }
 
     const isLoading = newsItem.isLoadingComments
-    const isLoaded = newsItem.isLoadedComments
+    const isLoaded = newsItem.hasLoadedComments
 
     const props = {
       newsId: Number(id),
       comments: this.state.comments,
       isLoading: newsItem.isLoadingComments,
-      isLoaded: newsItem.isLoadedComments,
+      isLoaded: newsItem.hasLoadedComments,
     }
 
     return <CommentList {...props} />

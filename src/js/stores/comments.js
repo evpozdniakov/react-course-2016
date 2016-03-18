@@ -37,7 +37,7 @@ export default class CommentStore extends NewsPartStore {
   getOrLoadNewsItemComments(newsId) {
     const newsItem = this._stores.news.getItem(newsId)
 
-    if (newsItem.isLoadedComments) {
+    if (newsItem.hasLoadedComments) {
       const comments = newsItem.getRelation('comments')
       return comments
     }
@@ -65,18 +65,18 @@ export default class CommentStore extends NewsPartStore {
     switch(type) {
       case LOAD + _COMMENTS + _START:
         newsItem.isLoadingComments = true
-        newsItem.isLoadedComments = false
+        newsItem.hasLoadedComments = false
         break
 
       case LOAD + _COMMENTS + _DONE:
         newsItem.isLoadingComments = false
-        newsItem.isLoadedComments = true
+        newsItem.hasLoadedComments = true
         data.response.forEach(this._addItem)
         break
 
       case LOAD + _COMMENTS + _FAIL:
         newsItem.isLoadingComments = false
-        newsItem.isLoadedComments = false
+        newsItem.hasLoadedComments = false
         break
     }
 
