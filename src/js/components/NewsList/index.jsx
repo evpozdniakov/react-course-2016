@@ -56,7 +56,7 @@ const NewsList = React.createClass({
 
       return (
         <li key={newsItem.id}>
-          <Link to={linkTo}>{shorterTitle}</Link>
+          <Link to={linkTo} activeClassName="active">{shorterTitle}</Link>
         </li>
       )
     })

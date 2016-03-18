@@ -67,7 +67,7 @@ export default class CommentListPage extends Component {
     var pages = []
     const maxPage = Math.floor(newsItem.comments.length / 10)
 
-    for (var i = 1; i < maxPage; i++) {
+    for (var i = 1; i <= maxPage; i++) {
       pages.push(i)
     }
 

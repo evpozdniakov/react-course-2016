@@ -64,8 +64,6 @@ export default class NewsItemPage extends Component {
       return null
     }
 
-    const linkToComments = (newsItem.isLoaded) ? this.renderLinkToComments() : null
-
     const props = {
       newsItem,
     }
@@ -73,20 +71,24 @@ export default class NewsItemPage extends Component {
     return (
       <div>
         <NewsItem {...props} />
-        {linkToComments}
+        {this.renderLinkToComments(newsItem)}
         {this.props.children}
       </div>
     )
   }
 
-  renderLinkToComments() {
-    const { id, page } = this.props.params
+  renderLinkToComments(newsItem) {
+    const { page } = this.props.params
 
     if (page) {
       return null
     }
 
-    const href = `/news/${id}/comments/1`
+    if (!newsItem.isLoaded || !newsItem.content || !newsItem.comments.length) {
+      return null
+    }
+
+    const href = `/news/${newsItem.id}/comments/1`
 
     return (
       <Link to={href}>

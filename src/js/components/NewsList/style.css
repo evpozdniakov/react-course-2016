@@ -26,3 +26,13 @@
 .news-titles li:first-child {
   margin-top: 0;
 }
+
+.news-titles li a {
+  color: #8c1818;
+  text-decoration: none;
+}
+
+.news-titles li a.active {
+  color: gray;
+  font-weight: italic;
+}

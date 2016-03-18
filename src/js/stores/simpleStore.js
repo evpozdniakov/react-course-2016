@@ -33,6 +33,10 @@ class SimpleStore extends EventEmitter {
   }
 
   _addItem = (itemData) => {
+    if (this._items.filter(item => item.id == itemData.id).length) {
+      return
+    }
+
     this._items.push(new Model(itemData, this._stores))
     this._maxId = itemData.id
   }
