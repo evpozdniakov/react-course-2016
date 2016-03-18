@@ -6,14 +6,14 @@ import addComment from 'HOC/addComment'
 import {postComment, loadNewsComments} from 'actions/comments'
 import './style.css'
 
-const NewsComments = React.createClass({
+const CommentList = React.createClass({
   propTypes: {
     newsId: PropTypes.number.isRequired,
     isLoading: PropTypes.bool,
     isLoaded: PropTypes.bool,
     comments: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number.isRequired
-    })).isRequired,
+    })),
     renderAddCommentUI: PropTypes.func.isRequired,
   },
 
@@ -64,4 +64,4 @@ const NewsComments = React.createClass({
   }
 })
 
-export default addComment(NewsComments)
+export default addComment(CommentList)

@@ -1,5 +1,6 @@
 import NewsPartStore from 'stores/newsParts'
 import AppDispatcher from 'dispatcher'
+import { loadNewsComments } from 'actions/comments'
 import {LOAD, MARK_AS_READ, POST, DELETE, _COMMENT, _COMMENTS, _START, _DONE, _FAIL} from 'constants'
 
 export default class CommentStore extends NewsPartStore {
@@ -31,6 +32,19 @@ export default class CommentStore extends NewsPartStore {
           break
       }
     })
+  }
+
+  getOrLoadNewsItemComments(newsId) {
+    const newsItem = this._stores.news.getItem(newsId)
+
+    if (newsItem.isLoadedComments) {
+      const comments = newsItem.getRelation('comments')
+      return comments
+    }
+
+    if (!newsItem.isLoadingComments) {
+      loadNewsComments(newsId)
+    }
   }
 
   postComment(data) {

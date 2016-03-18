@@ -25,6 +25,10 @@ export default class Model {
 
   _getFilterFn(filter) {
     return (item) => {
+      if (!filter) {
+        return true
+      }
+
       return Object.keys(filter).reduce((bool, key) => {
         return bool && (item[key] === filter[key])
       }, true)
