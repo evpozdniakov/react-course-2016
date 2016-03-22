@@ -1,6 +1,6 @@
 'use strict'
 
-import React from 'react'
+import React, { PropTypes } from 'react'
 import NewsItem from 'components/NewsItem'
 import { newsStore, commentStore } from 'stores'
 import { loadAllNews } from 'actions/news'
@@ -9,6 +9,16 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import './style.css'
 
 const NewsList = React.createClass({
+  childContextTypes: {
+    lang: PropTypes.string
+  },
+
+  getChildContext() {
+    return {
+      lang: this.props.params.lang,
+    }
+  },
+
   getInitialState() {
     return {
       newsData: newsStore.getAll(),
@@ -23,8 +33,8 @@ const NewsList = React.createClass({
   },
 
   componentWillUnmount() {
-    newsStore.remveEventListener(this.change)
-    commentStore.remveEventListener(this.change)
+    newsStore.removeEventListener(this.change)
+    commentStore.removeEventListener(this.change)
   },
 
   change() {
@@ -48,9 +58,10 @@ const NewsList = React.createClass({
 
   renderNewsTitles() {
     const links = this.state.newsData.map(newsItem => {
-      const linkTo = `/news/${newsItem.id}`
+      const { id, lang } = this.props.params
 
-      const { id } = this.props.params
+      const linkTo = `/${lang}/news/${newsItem.id}`
+
 
       const shorterTitle = newsItem.title.substr(0, 80) + '...';
 

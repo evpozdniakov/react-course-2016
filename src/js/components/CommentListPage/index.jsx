@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import CommentList from 'components/CommentList'
 import { newsStore, commentStore } from 'stores'
 import { Link, browserHistory } from 'react-router'
@@ -6,7 +6,10 @@ import './style.css'
 
 export default class CommentListPage extends Component {
   static propTypes = {
+  }
 
+  static contextTypes = {
+    lang: PropTypes.string,
   }
 
   constructor(props) {
@@ -55,7 +58,8 @@ export default class CommentListPage extends Component {
     const newsItem = newsStore.getItem(id)
 
     if (!newsItem || !newsItem.content || !newsItem.hasLoadedComments) {
-      const href = `/news/${id}/comments/1`
+      const { lang } = this.context.lang
+      const href = `/${lang}/news/${id}/comments/1`
 
       return (
         <Link to={href}>
@@ -68,10 +72,10 @@ export default class CommentListPage extends Component {
     const maxPage = Math.floor(newsItem.comments.length / 10)
 
     if (page > maxPage) {
-      browserHistory.push(`/news/${id}/comments/${maxPage}`)
+      browserHistory.replace(`/news/${id}/comments/${maxPage}`)
     }
     else if (isNaN(page)) {
-      browserHistory.push(`/news/${id}/comments/1`)
+      browserHistory.replace(`/news/${id}/comments/1`)
     }
 
     for (var i = 1; i <= maxPage; i++) {
@@ -79,7 +83,8 @@ export default class CommentListPage extends Component {
     }
 
     const links = pages.map(page => {
-      const href = `/news/${id}/comments/${page}`
+      const { lang } = this.context.lang
+      const href = `/${lang}/news/${id}/comments/${page}`
       const firstIndex = (page - 1) * 10
       const fromTo = `${firstIndex + 1}..${firstIndex + 10}`
 

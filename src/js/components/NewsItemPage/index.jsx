@@ -6,6 +6,10 @@ import { Link } from 'react-router'
 export default class NewsItemPage extends Component {
   static propTypes = {}
 
+  static contextTypes = {
+    lang: PropTypes.string
+  }
+
   constructor(props) {
     super()
 
@@ -88,7 +92,9 @@ export default class NewsItemPage extends Component {
       return null
     }
 
-    const href = `/news/${newsItem.id}/comments/1`
+    const { lang } = this.context
+
+    const href = `/${lang}/news/${newsItem.id}/comments/1`
 
     return (
       <Link to={href}>
