@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import CommentList from 'components/CommentList'
 import { newsStore, commentStore } from 'stores'
 import { Link, browserHistory } from 'react-router'
+import { i18n } from 'i18n'
 import './style.css'
 
 export default class CommentListPage extends Component {
@@ -63,7 +64,7 @@ export default class CommentListPage extends Component {
 
       return (
         <Link to={href}>
-          Комментарии
+          {i18n('Comments')}
         </Link>
       )
     }
@@ -83,7 +84,7 @@ export default class CommentListPage extends Component {
     }
 
     const links = pages.map(page => {
-      const { lang } = this.context.lang
+      const { lang } = this.context
       const href = `/${lang}/news/${id}/comments/${page}`
       const firstIndex = (page - 1) * 10
       const fromTo = `${firstIndex + 1}..${firstIndex + 10}`
@@ -98,7 +99,7 @@ export default class CommentListPage extends Component {
 
     return (
       <div className="comment-links">
-        Комментарии:
+        {i18n('Comments')}:
         {links}
       </div>
     )

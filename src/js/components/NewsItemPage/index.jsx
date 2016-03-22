@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import NewsItem from 'components/NewsItem'
 import { newsStore } from 'stores'
 import { Link } from 'react-router'
+import { i18n } from 'i18n'
 
 export default class NewsItemPage extends Component {
   static propTypes = {}
@@ -98,7 +99,7 @@ export default class NewsItemPage extends Component {
 
     return (
       <Link to={href}>
-        Комментарии
+        {i18n('Comments')}
       </Link>
     )
   }

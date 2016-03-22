@@ -2,6 +2,7 @@
 
 import './style.css'
 import React, {Component} from 'react'
+import { i18n } from 'i18n'
 
 export default OriginalComponent => {
   return class extends Component {
@@ -17,7 +18,7 @@ export default OriginalComponent => {
 
       return (
         <button {...props}>
-          Mark as read
+          {i18n('Mark_as_read')}
         </button>
       )
     }

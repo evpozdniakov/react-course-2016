@@ -22,5 +22,5 @@ header .lang-nav a {
 header .lang-nav a.active {
   color: gray;
   cursor: default;
-  box-shadow: 0 0 1px 0 gray;
+  box-shadow: 0 1px;
 }

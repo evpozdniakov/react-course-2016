@@ -1,7 +1,9 @@
 {
-  "Сomments":     "Комментарии",
+  "Comments":     "Комментарии",
   "Add_comment":  "Добавить комментаий",
   "Your_name":    "ФИО",
   "Your_comment": "Текст",
-  "Post_comment": "Отправить"
+  "Post_comment": "Отправить",
+  "Mark_as_read": "Прочитал",
+  "Loading...":   "Одну секунду..."
 }

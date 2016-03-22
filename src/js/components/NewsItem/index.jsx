@@ -2,6 +2,7 @@
 
 import React, {PropTypes} from 'react'
 import { markNewsAsRead, toggleShowNewsItem, loadNewsItem } from 'actions/news'
+import { i18n } from 'i18n'
 import './style.css'
 
 const NewsItem = React.createClass({
@@ -69,7 +70,7 @@ const NewsItem = React.createClass({
     const { content, isLoading } = this.props.newsItem
 
     if (isLoading) {
-      return <div className="loading">loading...</div>
+      return <div className="loading">{i18n('Loading...')}</div>
     }
 
     const props = {

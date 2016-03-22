@@ -3,6 +3,7 @@
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
 import './style.css'
+import { setLang } from 'i18n'
 
 export default class Body extends Component {
   static contextTypes = {
@@ -10,6 +11,8 @@ export default class Body extends Component {
   }
 
   render() {
+    setLang(this.props.params.lang)
+
     return (
       <div>
         {this.renderHeader()}

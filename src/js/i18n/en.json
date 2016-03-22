@@ -1,7 +1,9 @@
 {
-  "Сomments":     "Comments",
+  "Comments":     "Comments",
   "Add_comment":  "Add comment",
   "Your_name":    "Your name",
   "Your_comment": "Your comment",
-  "Post_comment": "Post"
+  "Post_comment": "Post",
+  "Mark_as_read": "Mark as read",
+  "Loading...":    "Loading..."
 }

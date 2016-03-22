@@ -37,6 +37,7 @@ module.exports = {
 			data: path.resolve(__dirname, 'src/js/data'),
 			constants: path.resolve(__dirname, 'src/js/constants'),
 			utils: path.resolve(__dirname, 'src/js/utils'),
+			i18n: path.resolve(__dirname, 'src/js/i18n'),
 		}
 	},
 
@@ -67,7 +68,12 @@ module.exports = {
 				include: path.resolve(__dirname, 'src/js'),
 				exclude: path.resolve(__dirname, 'node_modules'),
 				loader: 'style!css',
-			},
+			}, {
+				test: /\.json$/,
+				include: path.resolve(__dirname, 'src/js'),
+				exclude: path.resolve(__dirname, 'node_modules'),
+				loader: 'json',
+			}
 		]
 	},
 

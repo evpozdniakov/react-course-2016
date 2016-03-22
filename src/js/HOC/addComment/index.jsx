@@ -3,6 +3,7 @@
 import './style.css'
 import React, {Component} from 'react'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import { i18n } from 'i18n'
 
 export default OriginalComponent => {
   return class extends Component {
@@ -66,7 +67,7 @@ export default OriginalComponent => {
         onClick: this.toggleShowUI.bind(this)
       }
 
-      return <button {...props}>+ comment</button>
+      return <button {...props}>{i18n('Add_comment')}</button>
     }
 
     renderTransitionGroup() {
@@ -106,7 +107,7 @@ export default OriginalComponent => {
       const props = {
         key: 'input-author',
         className: 'input author',
-        placeholder: 'your name',
+        placeholder: i18n('Your_name'),
         onChange: this.handleChangeAuthor.bind(this),
         value: this.state.author,
       }
@@ -118,7 +119,7 @@ export default OriginalComponent => {
       const props = {
         key: 'input-text',
         className: 'input text',
-        placeholder: 'your comment',
+        placeholder: i18n('Your_comment'),
         onChange: this.handleChangeText.bind(this),
         value: this.state.text,
       }
@@ -133,7 +134,7 @@ export default OriginalComponent => {
         onClick: this.handlePostComment.bind(this)
       }
 
-      return <button {...props}>Post</button>
+      return <button {...props}>{i18n('Post_comment')}</button>
     }
 
     render() {

@@ -4,6 +4,7 @@ import React, {PropTypes} from 'react'
 import Comment from 'components/Comment'
 import addComment from 'HOC/addComment'
 import {postComment, loadNewsComments} from 'actions/comments'
+import { i18n } from 'i18n'
 import './style.css'
 
 const CommentList = React.createClass({
@@ -44,7 +45,7 @@ const CommentList = React.createClass({
     const { isLoading, comments } = this.props
 
     if (isLoading) {
-      return <div className="loading">loading...</div>
+      return <div className="loading">{i18n('Loading...')}</div>
     }
 
     const commentElms = comments.map(comment => {
