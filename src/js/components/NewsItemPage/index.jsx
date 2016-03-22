@@ -98,9 +98,11 @@ export default class NewsItemPage extends Component {
     const href = `/${lang}/news/${newsItem.id}/comments/1`
 
     return (
-      <Link to={href}>
-        {i18n('Comments')}
-      </Link>
+      <div className="comment-links">
+        <Link to={href}>
+          {i18n('Comments')}
+        </Link>
+      </div>
     )
   }
 }

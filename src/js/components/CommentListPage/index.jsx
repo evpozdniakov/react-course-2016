@@ -57,45 +57,42 @@ export default class CommentListPage extends Component {
   renderPagination() {
     const { id, page } = this.props.params
     const newsItem = newsStore.getItem(id)
+    var links
 
     if (!newsItem || !newsItem.content || !newsItem.hasLoadedComments) {
       const { lang } = this.context.lang
       const href = `/${lang}/news/${id}/comments/1`
-
-      return (
-        <Link to={href}>
-          {i18n('Comments')}
-        </Link>
-      )
+      links = null
     }
+    else {
+      var pages = []
+      const maxPage = Math.floor(newsItem.comments.length / 10)
 
-    var pages = []
-    const maxPage = Math.floor(newsItem.comments.length / 10)
+      if (page > maxPage) {
+        browserHistory.replace(`/news/${id}/comments/${maxPage}`)
+      }
+      else if (isNaN(page)) {
+        browserHistory.replace(`/news/${id}/comments/1`)
+      }
 
-    if (page > maxPage) {
-      browserHistory.replace(`/news/${id}/comments/${maxPage}`)
+      for (var i = 1; i <= maxPage; i++) {
+        pages.push(i)
+      }
+
+      links = pages.map(page => {
+        const { lang } = this.context
+        const href = `/${lang}/news/${id}/comments/${page}`
+        const firstIndex = (page - 1) * 10
+        const fromTo = `${firstIndex + 1}..${firstIndex + 10}`
+
+        return (
+          <span key={page}>
+            &nbsp;
+            <Link to={href} activeClassName="active">{fromTo}</Link>
+          </span>
+        )
+      })
     }
-    else if (isNaN(page)) {
-      browserHistory.replace(`/news/${id}/comments/1`)
-    }
-
-    for (var i = 1; i <= maxPage; i++) {
-      pages.push(i)
-    }
-
-    const links = pages.map(page => {
-      const { lang } = this.context
-      const href = `/${lang}/news/${id}/comments/${page}`
-      const firstIndex = (page - 1) * 10
-      const fromTo = `${firstIndex + 1}..${firstIndex + 10}`
-
-      return (
-        <span key={page}>
-          &nbsp;
-          <Link to={href} activeClassName="active">{fromTo}</Link>
-        </span>
-      )
-    })
 
     return (
       <div className="comment-links">

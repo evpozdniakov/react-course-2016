@@ -3,3 +3,7 @@
   text-decoration: none;
   color: gray;
 }
+
+.comment-links a {
+  color: #8C1818;
+}
