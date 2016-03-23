@@ -36,6 +36,7 @@ module.exports = {
 			containers: path.resolve(__dirname, 'src/js/containers'),
 			reducers: path.resolve(__dirname, 'src/js/reducers'),
 			store: path.resolve(__dirname, 'src/js/store'),
+			actions: path.resolve(__dirname, 'src/js/actions'),
 		}
 	},
 

@@ -3,7 +3,7 @@ export default (state = 0, action) => {
 
   switch (type) {
     case 'increment':
-      return state + 1
+      return state + data.value
     default:
       return state
   }
