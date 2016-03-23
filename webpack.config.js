@@ -9,7 +9,7 @@ const PRODUCTION = !DEVELOPMENT
 module.exports = {
 	context: path.resolve(__dirname, 'src/js'),
 	entry: {
-		index: './index',
+		index: './app',
 	},
 	output: {
 		path: path.resolve(__dirname, 'build'),
