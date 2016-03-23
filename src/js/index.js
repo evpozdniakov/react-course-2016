@@ -2,6 +2,6 @@
 
 import React from 'react'
 import ReactDOM, { render } from 'react-dom'
-import routes from './routes'
+import Root from 'containers/Root'
 
-render(routes, document.querySelector('#app-ctnr'))
+render(<Root />, document.querySelector('#app-ctnr'))

@@ -29,14 +29,10 @@ module.exports = {
 		modulesDirectories: ['node_modules'], // user resolve.root as alternative
 		extensions: ['', '.js', '.jsx'],
 		alias: {
+			containers: path.resolve(__dirname, 'src/js/containers'),
 			components: path.resolve(__dirname, 'src/js/components'),
 			HOC: path.resolve(__dirname, 'src/js/HOC'),
-			actions: path.resolve(__dirname, 'src/js/actions'),
-			dispatcher: path.resolve(__dirname, 'src/js/dispatcher'),
-			stores: path.resolve(__dirname, 'src/js/stores'),
-			data: path.resolve(__dirname, 'src/js/data'),
 			constants: path.resolve(__dirname, 'src/js/constants'),
-			utils: path.resolve(__dirname, 'src/js/utils'),
 			i18n: path.resolve(__dirname, 'src/js/i18n'),
 		}
 	},
