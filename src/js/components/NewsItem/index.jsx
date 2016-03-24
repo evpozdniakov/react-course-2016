@@ -4,6 +4,7 @@ import React, {PropTypes} from 'react'
 import { connect } from 'react-redux'
 import { getRelation } from 'utils'
 import CommentList from 'components/CommentList'
+import removable from 'HOC/removable'
 import './style.css'
 
 const NewsItem = React.createClass({
@@ -18,10 +19,20 @@ const NewsItem = React.createClass({
       isLoaded: PropTypes.bool,
     }).isRequired,
     comments: PropTypes.array,
+    renderDeleteBtn: PropTypes.func.isRequired,
+  },
+
+  curryHandleDelete() {
+    const { id } = this.props.newsItem
+    return () => {
+      console.log('--- TODO: delete news item', id);
+      return false
+    }
   },
 
   render() {
     const className = 'news-item'
+    const {newsItem, renderDeleteBtn} = this.props;
  
     const props = {
       className,
@@ -29,6 +40,7 @@ const NewsItem = React.createClass({
 
     return (
       <div {...props}>
+        {this.props.renderDeleteBtn(this.curryHandleDelete())}
         {this.renderDate()}
         {this.renderTitle()}
         {this.renderContent()}
@@ -94,4 +106,4 @@ const NewsItem = React.createClass({
 export default connect(state => {
   const { comments } = state
   return {comments}
-})(NewsItem)
+})(removable(NewsItem))
