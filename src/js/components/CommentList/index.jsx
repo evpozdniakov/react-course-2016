@@ -3,6 +3,8 @@
 import React, {PropTypes} from 'react'
 import Comment from 'components/Comment'
 import addComment from 'HOC/addComment'
+import { postComment } from 'actions/comments'
+import { connect } from 'react-redux'
 import './style.css'
 
 const CommentList = React.createClass({
@@ -14,17 +16,13 @@ const CommentList = React.createClass({
       id: PropTypes.number.isRequired
     })),
     renderAddCommentUI: PropTypes.func.isRequired,
+    postComment: PropTypes.func.isRequired,
   },
 
   handlePostComment({author, text}) {
-    console.log('---TODO: handlePostComment');
-    /*const data = {
-      newsId: this.props.newsId,
-      author ,
-      text
-    }
+    const { newsId, postComment } = this.props
 
-    postComment(data)*/
+    postComment({newsId, author, text})
   },
 
   render() {
@@ -64,4 +62,8 @@ const CommentList = React.createClass({
   }
 })
 
-export default addComment(CommentList)
+export default connect(state => {
+  return {}
+}, {
+  postComment
+})(addComment(CommentList))
