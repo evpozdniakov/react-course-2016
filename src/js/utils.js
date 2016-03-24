@@ -7,6 +7,7 @@ export function getRelation(obj, relation) {
     return null
   }
 
-  const ids = obj[relation]
-  return state[relation].filter(item => ids.indexOf(item.id) >= 0)
+  return obj[relation].map(id => {
+    return state[relation].filter(item => item.id === id)[0]
+  })
 }

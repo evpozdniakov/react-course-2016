@@ -34,6 +34,7 @@ export default OriginalComponent => {
 
       this.setState({
         isShown: false,
+        author: '',
         text: '',
       })
     }

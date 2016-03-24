@@ -10,7 +10,7 @@ export default (state = news, action) => {
       const newState = state.map(item => Object.assign({}, item))
       const newsItem = newState.filter(item => item.id === newsId)[0]
 
-      newsItem.comments.push(commentId)
+      newsItem.comments.unshift(commentId)
 
       return newState
   }

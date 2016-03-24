@@ -8,7 +8,6 @@ class AppContainer extends Component {
   }
 
   render() {
-    console.log('---render AppContainer');
     const { news } = this.props
 
     const newsItems = news.map(data => {

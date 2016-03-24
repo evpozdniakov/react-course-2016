@@ -13,7 +13,7 @@ export function setLang(lang) {
 
 export function i18n(label) {
   if (!currentLang) {
-    console.warn('i18n currentLang not specified')
+    // console.warn('i18n currentLang not specified')
   }
 
   return currentDictionary[label] || `[${label}]`
