@@ -22,7 +22,7 @@ function cloneState(state) {
 function handlePostComment(state, data) {
   const { commentId:id, newsId, author, text } = data
   const newState = cloneState(state)
-
+  //можно просто state.concat(...) 
   newState.push({
     id,
     newsId,
