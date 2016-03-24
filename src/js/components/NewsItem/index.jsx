@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { getRelation } from 'utils'
 import CommentList from 'components/CommentList'
 import removable from 'HOC/removable'
+import { deleteNewsItem } from 'actions/news'
 import './style.css'
 
 const NewsItem = React.createClass({
@@ -20,12 +21,14 @@ const NewsItem = React.createClass({
     }).isRequired,
     comments: PropTypes.array,
     renderDeleteBtn: PropTypes.func.isRequired,
+    deleteNewsItem: PropTypes.func.isRequired,
   },
 
   curryHandleDelete() {
-    const { id } = this.props.newsItem
+    const { newsItem, deleteNewsItem } = this.props
+
     return () => {
-      console.log('--- TODO: delete news item', id);
+      deleteNewsItem({newsId: newsItem.id})
       return false
     }
   },
@@ -106,4 +109,6 @@ const NewsItem = React.createClass({
 export default connect(state => {
   const { comments } = state
   return {comments}
+}, {
+  deleteNewsItem
 })(removable(NewsItem))
