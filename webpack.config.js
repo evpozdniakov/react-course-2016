@@ -27,7 +27,7 @@ module.exports = {
 
 	resolve: {
 		modulesDirectories: ['node_modules'], // user resolve.root as alternative
-		extensions: ['', '.js', '.jsx'],
+		extensions: ['', '.js', '.jsx', '.json'],
 		alias: {
 			i18n: path.resolve(__dirname, 'src/js/i18n'),
 			constants: path.resolve(__dirname, 'src/js/constants'),
@@ -37,6 +37,8 @@ module.exports = {
 			reducers: path.resolve(__dirname, 'src/js/reducers'),
 			store: path.resolve(__dirname, 'src/js/store'),
 			actions: path.resolve(__dirname, 'src/js/actions'),
+			fixtures: path.resolve(__dirname, 'src/js/fixtures'),
+			utils: path.resolve(__dirname, 'src/js/utils'),
 		}
 	},
 

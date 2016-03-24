@@ -2,7 +2,6 @@
 
 import React, {PropTypes} from 'react'
 import markAsRead from 'HOC/markAsRead'
-import {deleteComment, markCommentAsRead} from 'actions/comments'
 import './style.css'
 
 const NewsComment = React.createClass({
@@ -16,12 +15,13 @@ const NewsComment = React.createClass({
   },
 
   handleMarkAsRead() {
-    markCommentAsRead(this.props.comment.id)
+    console.log('---TODO:handleMarkAsRead');
   },
 
   removeComment(ev) {
     ev.preventDefault()
-    deleteComment(this.props.comment.id)
+    console.log('---TODO:removeComment');
+    // deleteComment(this.props.comment.id)
   },
 
   render() {

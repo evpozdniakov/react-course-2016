@@ -3,8 +3,6 @@
 import React, {PropTypes} from 'react'
 import Comment from 'components/Comment'
 import addComment from 'HOC/addComment'
-import {postComment, loadNewsComments} from 'actions/comments'
-import { i18n } from 'i18n'
 import './style.css'
 
 const CommentList = React.createClass({
@@ -19,13 +17,14 @@ const CommentList = React.createClass({
   },
 
   handlePostComment({author, text}) {
-    const data = {
+    console.log('---TODO: handlePostComment');
+    /*const data = {
       newsId: this.props.newsId,
       author ,
       text
     }
 
-    postComment(data)
+    postComment(data)*/
   },
 
   render() {
@@ -45,7 +44,7 @@ const CommentList = React.createClass({
     const { isLoading, comments } = this.props
 
     if (isLoading) {
-      return <div className="loading">{i18n('Loading...')}</div>
+      return <div className="loading">Loading...</div>
     }
 
     const commentElms = comments.map(comment => {

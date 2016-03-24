@@ -1,8 +1,9 @@
 'use strict'
 
 import React, {PropTypes} from 'react'
-import { markNewsAsRead, toggleShowNewsItem, loadNewsItem } from 'actions/news'
-import { i18n } from 'i18n'
+import { connect } from 'react-redux'
+import { getRelation } from 'utils'
+import CommentList from 'components/CommentList'
 import './style.css'
 
 const NewsItem = React.createClass({
@@ -12,20 +13,11 @@ const NewsItem = React.createClass({
       title: PropTypes.string.isRequired,
       published: PropTypes.string.isRequired,
       content: PropTypes.string,
+      comments: PropTypes.arrayOf(PropTypes.number),
       isLoading: PropTypes.bool,
       isLoaded: PropTypes.bool,
     }).isRequired,
-  },
-
-  shouldComponentUpdate(nextProps) {
-    const {id, content, isLoaded, isLoading} = nextProps.newsItem
-
-    if (!content && !isLoading && !isLoaded) {
-      loadNewsItem(id)
-      return false
-    }
-
-    return true
+    comments: PropTypes.array,
   },
 
   render() {
@@ -40,6 +32,7 @@ const NewsItem = React.createClass({
         {this.renderDate()}
         {this.renderTitle()}
         {this.renderContent()}
+        {this.renderComments()}
       </div>
     )
   },
@@ -70,7 +63,7 @@ const NewsItem = React.createClass({
     const { content, isLoading } = this.props.newsItem
 
     if (isLoading) {
-      return <div className="loading">{i18n('Loading...')}</div>
+      return <div className="loading">Loading...</div>
     }
 
     const props = {
@@ -84,6 +77,21 @@ const NewsItem = React.createClass({
       </div>
     )
   },
+
+  renderComments() {
+    const { newsItem } = this.props
+    const comments = getRelation(newsItem, 'comments')
+
+    const props = {
+      newsId: newsItem.id,
+      comments
+    }
+
+    return <CommentList {...props} />
+  }
 })
 
-export default NewsItem
+export default connect(state => {
+  const { comments } = state
+  return {comments}
+})(NewsItem)

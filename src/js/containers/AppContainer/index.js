@@ -1,32 +1,28 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { increment } from 'actions/counter'
+import NewsItem from 'components/NewsItem'
 
 class AppContainer extends Component {
   static propTypes = {
-    counter: PropTypes.number.isRequired,
-    increment: PropTypes.func.isRequired,
-  }
-
-  handleIncrement = () => {
-    this.props.increment(1)
+    news: PropTypes.array,
   }
 
   render() {
-    const { counter } = this.props
+    const { news } = this.props
+
+    const newsItems = news.map(data => {
+      return <NewsItem key={data.id} newsItem={data} />
+    })
 
     return (
-      <div onClick={this.handleIncrement}>
-        <h1>Click me!</h1>
-        <h3>Clicked {counter} times</h3>
+      <div>
+        {newsItems}
       </div>
     )
   }
 }
 
 export default connect(state => {
-  const { counter } = state
-  return {counter}
-}, {
-  increment
+  const { news } = state
+  return {news}
 })(AppContainer)

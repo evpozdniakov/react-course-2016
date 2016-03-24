@@ -1,6 +1,6 @@
-import news from 'fixtures/news'
+import comments from 'fixtures/comments'
 
-export default (state = news, action) => {
+export default (state = comments, action) => {
   const { data, type } = action
 
   /*switch (type) {
