@@ -1,12 +1,5 @@
-import { POST, DELETE, _NEWS_ITEM, _COMMENT } from 'constants'
+import { DELETE, _NEWS_ITEM } from 'constants'
 import store from 'store'
-
-export function postComment(data) {
-  return {
-    type: POST + _COMMENT,
-    data: data,
-  }
-}
 
 export function deleteNewsItem(data) {
 	const { newsId } = data

@@ -21,8 +21,9 @@ function cloneState(state) {
 
 function handlePostComment(state, data) {
   const { commentId:id, newsId, author, text } = data
+  const newState = cloneState(state)
 
-  const newState = cloneState(state).push({
+  newState.push({
     id,
     newsId,
     author,
@@ -34,7 +35,6 @@ function handlePostComment(state, data) {
 
 function handleDeleteNewsItem(state, data) {
   const { commentIds } = data
-
   const newState = cloneState(state).filter(item => !commentIds.includes(item.id))
 
   return newState

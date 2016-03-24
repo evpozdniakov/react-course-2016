@@ -31,7 +31,7 @@ const NewsComment = React.createClass({
 
     return (
       <div {...props}>
-        {this.props.renderReadBtn(this.handleMarkAsRead)}
+        {/*this.props.renderReadBtn(this.handleMarkAsRead)*/}
         {this.renderAuthor()}
         {this.renderText()}
       </div>

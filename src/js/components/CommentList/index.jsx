@@ -5,7 +5,6 @@ import Comment from 'components/Comment'
 import addComment from 'HOC/addComment'
 import { postComment } from 'actions/comments'
 import { connect } from 'react-redux'
-import randomID from 'random-id'
 import './style.css'
 
 const CommentList = React.createClass({
@@ -22,9 +21,8 @@ const CommentList = React.createClass({
 
   handlePostComment({author, text}) {
     const { newsId, postComment } = this.props
-    const commentId = Number(randomID(20, '0'))
 
-    postComment({commentId, newsId, author, text})
+    postComment({newsId, author, text})
   },
 
   render() {
