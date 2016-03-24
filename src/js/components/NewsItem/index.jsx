@@ -21,6 +21,7 @@ const NewsItem = React.createClass({
   },
 
   render() {
+    console.log('---render NewsItem');
     const className = 'news-item'
  
     const props = {
@@ -79,8 +80,12 @@ const NewsItem = React.createClass({
   },
 
   renderComments() {
+    console.log('--- will call getRelation');
+    // debugger
     const { newsItem } = this.props
+    console.log('---', newsItem);
     const comments = getRelation(newsItem, 'comments')
+    console.log('---', comments);
 
     const props = {
       newsId: newsItem.id,

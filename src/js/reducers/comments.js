@@ -1,14 +1,12 @@
 import comments from 'fixtures/comments'
 import { POST, _COMMENT } from 'constants'
-import randomID from 'random-id'
 
 export default (state = comments, action) => {
   const { data, type } = action
 
   switch (type) {
     case POST + _COMMENT:
-      const { newsId, author, text } = data
-      const id = randomID(20, '0')
+      const { commentId:id, newsId, author, text } = data
 
       state.push({
         id,
@@ -16,8 +14,6 @@ export default (state = comments, action) => {
         author,
         text,
       })
-
-      console.log('--- randomID is', id);
 
       return state
   }
