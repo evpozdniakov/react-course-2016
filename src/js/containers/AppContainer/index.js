@@ -12,15 +12,7 @@ class AppContainer extends Component {
     const { news } = this.props
 
     const newsItems = news.map(data => {
-      // так не работает
-      // return <NewsItem key={data.id} newsItem={data} />
-
-      const date = new Date().getTime()
-      return (
-        <NewsItem key={data.id} newsItem={data}>
-          {date}
-        </NewsItem>
-      )
+      return <NewsItem key={data.id} newsItem={data} />
     })
 
     return (

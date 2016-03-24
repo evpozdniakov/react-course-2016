@@ -7,7 +7,7 @@ export default (state = news, action) => {
   switch (type) {
     case POST + _COMMENT:
       const { commentId, newsId } = data
-      const newState = state.slice()
+      const newState = state.map(item => Object.assign({}, item))
       const newsItem = newState.filter(item => item.id === newsId)[0]
 
       newsItem.comments.push(commentId)
